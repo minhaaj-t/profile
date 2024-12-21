@@ -38,18 +38,4 @@ const AIBotButton: React.FC<{ onClick: () => void }> = ({ onClick }) => {
   );
 };
 
-// Main component to show the AIBotButton
-const AIBotPage: React.FC = () => {
-  const handleClick = () => {
-    alert("AI Assistant Button Clicked!");
-  };
-
-  return (
-    <div className="min-h-screen flex justify-center items-center bg-gray-100">
-      <h1 className="text-3xl font-semibold mb-8">AI Bot Button Page</h1>
-      <AIBotButton onClick={handleClick} />
-    </div>
-  );
-};
-
 export default AIBotButton;
