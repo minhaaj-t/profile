@@ -1,0 +1,130 @@
+import React, { useState, useEffect, useCallback } from 'react';
+import { Github, Linkedin, Mail, Moon, Sun, Home, Folder, Code2, MessageSquare, User, Grid } from 'lucide-react';
+import { ProjectCard } from './ProjectCard';
+import { SkillCard } from './SkillCard';
+import { ContactForm } from './ContactForm';
+import { CircularNavbar } from './CircularNavbar';
+import { SocialMediaGrid } from './SocialMediaGrid';
+import { projects, skills, socialPosts } from './data';
+
+const Portfolio: React.FC = () => {
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    return false;
+  });
+  const [activeSection, setActiveSection] = useState('home');
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadingText, setLoadingText] = useState('');
+
+  // ... (keep the existing useEffect hooks and helper functions)
+
+  const toggleDarkMode = () => setIsDarkMode(prev => !prev);
+
+  return (
+    <div className={`min-h-screen transition-colors duration-300 ${isDarkMode ? 'dark bg-gray-900 text-white' : 'bg-gray-50 text-gray-900'}`}>
+      {/* Keep the existing nav bar */}
+      
+      {/* Main Content */}
+      <main className="pt-16 pb-20">
+        <section id="home" className={`min-h-screen flex flex-col justify-center ${activeSection === 'home' ? 'block' : 'hidden'}`}>
+          <div className="text-center mb-8">
+            <div className="relative w-64 h-64 mx-auto mb-8">
+              <img
+                src={isDarkMode ? "/dark-shirt-image.jpg" : "/light-shirt-image.jpg"}
+                alt="Profile"
+                className="rounded-full object-cover w-full h-full"
+              />
+            </div>
+            <h1 className="text-5xl font-bold mb-4">Hi, I'm Your Name</h1>
+            <p className="text-xl mb-8">Full Stack Developer</p>
+            <div className="flex justify-center space-x-4">
+              <button 
+                className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+                onClick={() => setActiveSection('projects')}
+              >
+                View Projects
+              </button>
+              <button 
+                className="border border-blue-500 text-blue-500 px-6 py-2 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+                onClick={() => setActiveSection('contact')}
+              >
+                Contact Me
+              </button>
+            </div>
+          </div>
+          <div className="max-w-4xl mx-auto px-4">
+            <h2 className="text-3xl font-bold mb-4">About Me</h2>
+            <p className="text-lg mb-6">
+              I'm a passionate Full Stack Developer with expertise in modern web technologies. 
+              With a strong foundation in both front-end and back-end development, I create 
+              seamless, user-centric applications that solve real-world problems.
+            </p>
+            <p className="text-lg mb-6">
+              My journey in tech started with a curiosity for how things work, which led me to 
+              pursue a degree in Computer Science. Since then, I've worked on various projects, 
+              from small startups to large enterprises, always focusing on writing clean, 
+              efficient, and scalable code.
+            </p>
+            <p className="text-lg">
+              When I'm not coding, you can find me exploring new technologies, contributing to 
+              open-source projects, or sharing my knowledge through tech blogs and community meetups.
+            </p>
+          </div>
+        </section>
+
+        {/* Projects Section */}
+        <section id="projects" className={`py-16 ${activeSection === 'projects' ? 'block' : 'hidden'}`}>
+          <div className="max-w-6xl mx-auto px-4">
+            <h2 className="text-3xl font-bold mb-8">Projects</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {projects.map((project, index) => (
+                <ProjectCard key={index} project={project} isDarkMode={isDarkMode} />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Skills Section */}
+        <section id="skills" className={`py-16 ${activeSection === 'skills' ? 'block' : 'hidden'}`}>
+          <div className="max-w-6xl mx-auto px-4">
+            <h2 className="text-3xl font-bold mb-8">Skills</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {skills.map((skill, index) => (
+                <SkillCard key={index} skill={skill} isDarkMode={isDarkMode} />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Contact Section */}
+        <section id="contact" className={`py-16 ${activeSection === 'contact' ? 'block' : 'hidden'}`}>
+          <div className="max-w-2xl mx-auto px-4">
+            <h2 className="text-3xl font-bold mb-8 text-center">Get in Touch</h2>
+            <ContactForm isDarkMode={isDarkMode} />
+          </div>
+        </section>
+
+        {/* Social Media Grid Section */}
+        <section id="social" className={`py-16 ${activeSection === 'social' ? 'block' : 'hidden'}`}>
+          <div className="max-w-6xl mx-auto px-4">
+            <h2 className="text-3xl font-bold mb-8">Social Media</h2>
+            <SocialMediaGrid posts={socialPosts} />
+          </div>
+        </section>
+      </main>
+
+      {/* Circular Bottom Navbar */}
+      <CircularNavbar 
+        activeSection={activeSection} 
+        setActiveSection={setActiveSection}
+        isDarkMode={isDarkMode}
+        toggleDarkMode={toggleDarkMode}
+      />
+    </div>
+  );
+};
+
+export default Portfolio;
+
