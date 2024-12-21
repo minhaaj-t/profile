@@ -190,6 +190,14 @@ export const PortfolioHome: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+      {/* Theme Toggle */}
+      <Button
+        onClick={() => setIsDarkMode(!isDarkMode)}
+        className="fixed top-4 right-4 z-50 !p-2"
+      >
+        <span className="text-xl">{isDarkMode ? "" : ""}</span>
+      </Button>
+
       {/* Header */}
       <header className="py-16 px-4">
         <div className="max-w-4xl mx-auto text-center">
