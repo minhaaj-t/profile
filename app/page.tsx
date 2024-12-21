@@ -277,7 +277,7 @@ export default function Home() {
                   />
                 </div>
                 <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-                  Hi, I'm{" "}
+                  Hi, I am{" "}
                   <span className="bg-gradient-to-r from-blue-500 to-purple-600 text-transparent bg-clip-text animate-gradient-x">
                     Muhammed Minhaj Mahroof
                   </span>
@@ -286,7 +286,7 @@ export default function Home() {
                   Full Stack Developer
                 </p>
                 <p className="mt-5 text-lg text-gray-600 dark:text-gray-400 max-w-3xl">
-                  I'm passionate about creating seamless, user-centric
+                  I am passionate about creating seamless, user-centric
                   applications that solve real-world problems. With expertise in
                   both front-end and back-end development, I bring ideas to life
                   through clean, efficient, and scalable code.
