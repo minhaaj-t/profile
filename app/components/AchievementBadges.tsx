@@ -103,10 +103,7 @@ const AchievementBadges: React.FC = () => {
       <div className="flex gap-6 p-4 min-w-max">
         {type === "badges"
           ? [...items, ...items, ...items].map((badge, index) => (
-              <div
-                key={badge.name + index} // Adding the key prop correctly
-                className="flex flex-col items-center transition-transform hover:scale-110"
-              >
+              <div className="flex flex-col items-center transition-transform hover:scale-110">
                 <div className="w-24 h-24 overflow-hidden">
                   <img
                     src={badge.image}
@@ -119,7 +116,7 @@ const AchievementBadges: React.FC = () => {
                 </span>
               </div>
             ))
-          : [...items, ...items, ...items].map((cert, index) => (
+          : [...items, ...items, ...items].map((cert) => (
               <div className="flex flex-col justify-between w-80 h-40 p-4 bg-white rounded-lg shadow-md transition-transform hover:scale-105 dark:bg-gray-800">
                 <div className="flex gap-4">
                   <div className="w-16 h-16 rounded-lg overflow-hidden">
