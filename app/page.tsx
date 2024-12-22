@@ -285,13 +285,14 @@ export default function Home() {
                 <p className="mt-3 text-xl text-gray-600 dark:text-gray-300 sm:mt-5 sm:text-2xl lg:text-3xl">
                   Full Stack Developer
                 </p>
-                <p className="mt-5 text-lg text-gray-600 dark:text-gray-400 max-w-3xl">
+                <p className="mt-5 text-lg text-gray-600 dark:text-gray-400 max-w-3xl sm:text-left text-justify">
                   I am passionate about creating seamless, user-centric
                   applications that solve real-world problems. With expertise in
                   both front-end and back-end development, I bring ideas to life
                   through clean, efficient, and scalable code.
                 </p>
-                <div className="mt-8 flex flex-col sm:flex-row sm:space-x-4">
+
+                <div className="mt-8 flex flex-col sm:flex-row sm:space-x-4 items-center sm:items-start">
                   <button
                     onClick={() => handleNavigation("projects")}
                     className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
@@ -305,6 +306,7 @@ export default function Home() {
                     Contact Me
                   </button>
                 </div>
+
                 <PortfolioHome />
               </div>
               <div className="mt-10 lg:mt-0 lg:ml-10 lg:hidden">
