@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Github, Linkedin, Mail, Moon, Sun, Menu, X } from "lucide-react";
 import { ProjectCard } from "./components/ProjectCard";
+import AchievementBadges from "./components/AchievementBadges";
 import PortfolioHome from "./components/PortfolioHome";
 import { SkillCard } from "./components/SkillCard";
 import { ContactForm } from "./components/ContactForm";
@@ -345,6 +346,7 @@ export default function Home() {
               ))}
             </div>
           </div>
+          <AchievementBadges />
         </section>
 
         <section
