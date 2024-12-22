@@ -169,14 +169,14 @@ const AchievementBadges: React.FC = () => {
           : // Certificates section - repeated 3 times for smooth infinite scroll
             [...items, ...items, ...items].map((cert, index) => (
               <div
-                key={cert.id ? cert.id : `${index}`} // Ensure unique key for each certificate
+                // key={cert.id ? cert.id : `${index}`} // Ensure unique key for each certificate
                 className="flex flex-col justify-between w-80 h-40 p-4 bg-white rounded-lg shadow-md transition-transform hover:scale-105 dark:bg-gray-800"
               >
                 <div className="flex gap-4">
                   <div className="w-16 h-16 rounded-lg overflow-hidden">
                     <img
                       src={cert.image}
-                      alt={cert.provider || "Certificate"} // Fallback for missing provider
+                      // alt={cert.provider || "Certificate"} // Fallback for missing provider
                       className="w-full h-full object-cover"
                     />
                   </div>
@@ -185,17 +185,17 @@ const AchievementBadges: React.FC = () => {
                       {cert.name}
                     </h3>
                     <p className="text-sm text-gray-500 dark:text-gray-400">
-                      {cert.provider || "Provider not available"}{" "}
+                      {/* {cert.provider || "Provider not available"}{" "} */}
                       {/* Fallback text */}
                     </p>
                     <p className="text-sm text-gray-500 dark:text-gray-400">
-                      Issued {cert.date}
+                      {/* Issued {cert.date} */}
                     </p>
                   </div>
                 </div>
                 <div className="flex justify-between items-center mt-4">
                   <span className="text-xs text-gray-400">
-                    ID: {cert.id || "N/A"} {/* Fallback text for missing ID */}
+                    {/* ID: {cert.id || "N/A"} Fallback text for missing ID */}
                   </span>
                   <div className="flex items-center gap-2">
                     <span className="text-xs text-green-600 font-medium">
