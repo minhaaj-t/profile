@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Github, Linkedin, Mail, Moon, Sun, Menu, X } from "lucide-react";
 import { ProjectCard } from "./components/ProjectCard";
-// import AchievementBadges from "./components/AchievementBadges";
+import AchievementBadges from "./components/AchievementBadges";
 import PortfolioHome from "./components/PortfolioHome";
 import { SkillCard } from "./components/SkillCard";
 import { ContactForm } from "./components/ContactForm";
@@ -346,13 +346,13 @@ export default function Home() {
               ))}
             </div>
           </div>
-          {/* <AchievementBadges /> */}
         </section>
 
         <section
           id="skills"
           className={`py-16 ${activeSection === "skills" ? "block" : "hidden"}`}
         >
+          <AchievementBadges />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <GradientTitle>Skills</GradientTitle>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
