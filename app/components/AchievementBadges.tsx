@@ -88,7 +88,7 @@ const AchievementBadges: React.FC = () => {
     return () => {
       Object.values(intervals).forEach(clearInterval);
     };
-  }, []);
+  }, []); // Empty dependency array means this effect only runs once on mount
 
   // Scrolling Section Component
   const ScrollingSection: React.FC<{
@@ -104,7 +104,7 @@ const AchievementBadges: React.FC = () => {
         {type === "badges"
           ? [...items, ...items, ...items].map((badge, index) => (
               <div
-                key={`${badge.name}-${index}`}
+                key={badge.name + index} // Adding the key prop correctly
                 className="flex flex-col items-center transition-transform hover:scale-110"
               >
                 <div className="w-24 h-24 overflow-hidden">
