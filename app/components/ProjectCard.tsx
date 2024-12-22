@@ -6,11 +6,12 @@ interface Project {
   description: string;
   tags: string[];
   link: string;
-  image: string;
   client: string;
   duration: string;
   role: string;
   technologies: string[];
+  imageDark: string;
+  imageLight: string;
 }
 
 interface ProjectCardProps {
@@ -27,24 +28,27 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   return (
     <div
       className={`rounded-lg overflow-hidden shadow-lg transition-all duration-300 transform hover:scale-105 ${
-        isDarkMode ? "bg-gray-800" : "bg-white"
+        isDarkMode ? "bg-gray-800 text-gray-200" : "bg-white text-gray-800"
       }`}
     >
+      {/* Dynamic image switching */}
       <img
-        src={project.image}
+        src={isDarkMode ? project.imageDark : project.imageLight}
         alt={project.title}
         className="w-full h-48 object-cover"
       />
       <div className="p-6">
         <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">
-          {project.description}
-        </p>
+        <p className="mb-4">{project.description}</p>
         <div className="flex flex-wrap gap-2 mb-4">
-          {project.tags.map((tag, i) => (
+          {project.tags.map((tag, index) => (
             <span
-              key={i}
-              className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
+              key={index}
+              className={`px-3 py-1 rounded-full text-sm ${
+                isDarkMode
+                  ? "bg-blue-600 text-blue-100"
+                  : "bg-blue-100 text-blue-800"
+              }`}
             >
               {tag}
             </span>
@@ -79,7 +83,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         )}
         <a
           href={project.link}
-          className="inline-flex items-center justify-center w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors duration-300"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center justify-center w-full px-4 py-2 mt-4 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors duration-300"
         >
           View Project
           <ChevronRight size={20} className="ml-2" />

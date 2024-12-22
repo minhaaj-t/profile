@@ -161,9 +161,9 @@ export const PortfolioHome: React.FC = () => {
     { name: "Next.js", level: 90 },
     { name: "React", level: 95 },
     { name: "Node.js", level: 85 },
-    { name: "TypeScript", level: 88 },
-    { name: "Python", level: 82 },
-    { name: "Docker", level: 80 },
+    { name: "React Native", level: 88 },
+    { name: "Laravel", level: 92 },
+    { name: "WordPress", level: 80 },
     { name: "AWS", level: 85 },
     { name: "MongoDB", level: 87 },
   ];
@@ -201,9 +201,9 @@ export const PortfolioHome: React.FC = () => {
       {/* Header */}
       <header className="py-16 px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
+          {/* <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
             Full-Stack Developer & Solutions Architect
-          </h1>
+          </h1> */}
           <p className="text-lg text-gray-600 dark:text-gray-300 flex items-center justify-center gap-2">
             <span>📍</span> Ajman, United Arab Emirates
           </p>
@@ -215,7 +215,7 @@ export const PortfolioHome: React.FC = () => {
         {/* Freelance Services */}
         <section>
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white">
-            Freelance Services
+            Crafted Solutions
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {freelanceServices.map((service, index) => (
@@ -248,7 +248,7 @@ export const PortfolioHome: React.FC = () => {
         {/* Services */}
         <section>
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white">
-            Services
+            Curated Talent
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {services.map((service, index) => (

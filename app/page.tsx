@@ -269,10 +269,10 @@ export default function Home() {
                   <img
                     src={
                       isDarkMode
-                        ? "https://i.postimg.cc/MpVGNwqL/Snapinsta-app-432739680-940049730850557-8672851049421517984-n-1080.jpg"
+                        ? "https://i.postimg.cc/ZRhhH4wm/Mi-NHAJ-Profile-picture.jpg"
                         : "https://i.postimg.cc/4xs3DMyN/Snapinsta-app-348708136-165323943175436-763747922542576098-n-1080.jpg"
                     }
-                    alt="Profile"
+                    alt="MiNHAJ Profile Picture"
                     className="rounded-full object-cover w-full h-full transition-opacity duration-300"
                   />
                 </div>
@@ -296,7 +296,7 @@ export default function Home() {
                     onClick={() => handleNavigation("projects")}
                     className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                   >
-                    View Projects
+                    Download CV
                   </button>
                   <button
                     onClick={() => handleNavigation("contact")}
@@ -308,7 +308,18 @@ export default function Home() {
                 <PortfolioHome />
               </div>
               <div className="mt-10 lg:mt-0 lg:ml-10 lg:hidden">
-                <div className="relative w-64 h-64 rounded-full overflow-hidden mx-auto"></div>
+                <div className="relative w-64 h-64 overflow-hidden mx-auto">
+                  {" "}
+                  <img
+                    src={
+                      isDarkMode
+                        ? "https://i.postimg.cc/MpVGNwqL/Snapinsta-app-432739680-940049730850557-8672851049421517984-n-1080.jpg"
+                        : "https://i.postimg.cc/R0JHfQD8/Snapinsta-app-469140245-1283808049475324-4824924151126626460-n-1080.jpg"
+                    }
+                    alt="Profile"
+                    className="object-cover w-full h-full transition-opacity duration-300"
+                  />
+                </div>
               </div>
             </div>
           </div>
