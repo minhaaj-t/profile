@@ -100,7 +100,7 @@ const AchievementBadges: React.FC = () => {
         {type === "badges"
           ? [...items, ...items, ...items].map((badge, index) => (
               <div
-                key={`${badge.name}-${index}`}
+                key={`${badge.name}-${index}`} // Retain this key for badges
                 className="flex flex-col items-center transition-transform hover:scale-110"
               >
                 <div className="w-24 h-24 overflow-hidden">
@@ -116,10 +116,7 @@ const AchievementBadges: React.FC = () => {
               </div>
             ))
           : [...items, ...items, ...items].map((cert, index) => (
-              <div
-                // key={cert.id ? cert.id : `cert-${index}`} // Use cert.id or fallback to index with a prefix
-                className="flex flex-col justify-between w-80 h-40 p-4 bg-white rounded-lg shadow-md transition-transform hover:scale-105 dark:bg-gray-800"
-              >
+              <div className="flex flex-col justify-between w-80 h-40 p-4 bg-white rounded-lg shadow-md transition-transform hover:scale-105 dark:bg-gray-800">
                 <div className="flex gap-4">
                   <div className="w-16 h-16 rounded-lg overflow-hidden">
                     <img
@@ -167,12 +164,6 @@ const AchievementBadges: React.FC = () => {
       <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">
         Achievement Badges & Certificates
       </h2>
-      <button
-        onClick={() => setIsPaused(!isPaused)}
-        className="mb-4 p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
-      >
-        {isPaused ? "Resume Scrolling" : "Pause Scrolling"}
-      </button>
 
       <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4">
         Badges
