@@ -20,7 +20,7 @@ interface ScrollingSectionProps {
 }
 
 const AchievementBadges: React.FC = () => {
-  const [isPaused, setIsPaused] = useState<boolean>(false);
+  const [isPaused] = useState<boolean>(false);
 
   const containerRefs = {
     badges: useRef<HTMLDivElement | null>(null),
