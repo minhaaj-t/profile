@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 // Types
 interface FreelanceService {
@@ -40,22 +40,42 @@ interface ButtonProps {
 }
 
 export const PortfolioHome: React.FC = () => {
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  // State for dark mode
+  const [darkMode, setDarkMode] = useState<boolean>(false);
 
+  // Toggle dark mode
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
+
+  // Set the theme based on darkMode state
   useEffect(() => {
-    document.documentElement.classList.toggle("dark", isDarkMode);
-  }, [isDarkMode]);
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [darkMode]);
+
+  // Detect user's system theme preference on initial load
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      setDarkMode(savedTheme === "dark");
+    } else {
+      const prefersDarkMode = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+      setDarkMode(prefersDarkMode);
+    }
+  }, []);
 
   // Components
   const Card: React.FC<CardProps> = ({ children, className = "" }) => (
     <div
-      className={`
-        bg-white dark:bg-gray-800 
-        rounded-lg shadow-lg 
-        hover:shadow-xl dark:shadow-gray-900/30 
-        transition-all duration-300 
-        ${className}
-      `}
+      className={`bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl dark:shadow-gray-900/30 transition-all duration-300 ${className}`}
     >
       {children}
     </div>
@@ -63,17 +83,7 @@ export const PortfolioHome: React.FC = () => {
 
   const Badge: React.FC<BadgeProps> = ({ children, className = "" }) => (
     <span
-      className={`
-        inline-flex items-center 
-        px-3 py-1.5 
-        rounded-full 
-        text-sm font-medium 
-        bg-blue-100 dark:bg-blue-900/30 
-        text-blue-800 dark:text-blue-200 
-        transition-colors duration-300
-        hover:bg-blue-200 dark:hover:bg-blue-900/50
-        ${className}
-      `}
+      className={`inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 transition-colors duration-300 hover:bg-blue-200 dark:hover:bg-blue-900/50 ${className}`}
     >
       {children}
     </span>
@@ -86,14 +96,7 @@ export const PortfolioHome: React.FC = () => {
   }) => (
     <button
       onClick={onClick}
-      className={`
-        p-3 rounded-lg 
-        bg-gray-100 dark:bg-gray-800 
-        hover:bg-gray-200 dark:hover:bg-gray-700 
-        transition-colors duration-300 
-        text-gray-800 dark:text-gray-200
-        ${className}
-      `}
+      className={`p-3 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300 text-gray-800 dark:text-gray-200 ${className}`}
     >
       {children}
     </button>
@@ -190,23 +193,15 @@ export const PortfolioHome: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
-      {/* Theme Toggle */}
-      <Button
-        onClick={() => setIsDarkMode(!isDarkMode)}
-        className="fixed top-4 right-4 z-50 !p-2"
-      >
-        <span className="text-xl">{isDarkMode ? "" : ""}</span>
-      </Button>
-
       {/* Header */}
       <header className="py-16 px-4">
         <div className="max-w-4xl mx-auto text-center">
-          {/* <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
-            Full-Stack Developer & Solutions Architect
-          </h1> */}
           <p className="text-lg text-gray-600 dark:text-gray-300 flex items-center justify-center gap-2">
             <span>📍</span> Ajman, United Arab Emirates
           </p>
+          <Button onClick={toggleDarkMode} className="mt-4">
+            Toggle Dark Mode
+          </Button>
         </div>
       </header>
 
@@ -342,9 +337,9 @@ export const PortfolioHome: React.FC = () => {
         {/* Hobbies */}
         <section>
           <h2 className="text-3xl font-bold text-center mb-8 text-gray-900 dark:text-white">
-            Hobbies
+            My Hobbies
           </h2>
-          <div className="flex flex-wrap justify-center gap-3">
+          <div className="flex flex-wrap justify-center gap-6">
             {hobbies.map((hobby, index) => (
               <Badge key={index}>{hobby}</Badge>
             ))}
