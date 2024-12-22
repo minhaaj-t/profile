@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 
+// Types for Badge and Certificate
 interface Badge {
   name: string;
   image: string;
@@ -12,6 +13,7 @@ interface Certificate {
 }
 
 const AchievementBadges: React.FC = () => {
+  // References for scrolling containers
   const containerRefs = {
     badges: useRef<HTMLDivElement | null>(null),
     certificates: useRef<HTMLDivElement | null>(null),
@@ -54,12 +56,14 @@ const AchievementBadges: React.FC = () => {
     },
   ];
 
+  // Scrolling logic for badges and certificates
   useEffect(() => {
     const autoScroll = (container: HTMLDivElement | null, reverse = false) => {
       if (container) {
         const scrollAmount = reverse ? -1 : 1;
         container.scrollLeft += scrollAmount;
 
+        // Reset the scroll position when reaching the end or beginning
         if (reverse && container.scrollLeft <= 0) {
           container.scrollLeft = container.scrollWidth / 2;
         } else if (
@@ -80,11 +84,13 @@ const AchievementBadges: React.FC = () => {
       ),
     };
 
+    // Clean up intervals on component unmount
     return () => {
       Object.values(intervals).forEach(clearInterval);
     };
   }, []);
 
+  // Scrolling Section Component
   const ScrollingSection: React.FC<{
     items: Badge[] | Certificate[];
     type: "badges" | "certificates";
@@ -98,7 +104,7 @@ const AchievementBadges: React.FC = () => {
         {type === "badges"
           ? [...items, ...items, ...items].map((badge, index) => (
               <div
-                key={`${badge.name}-${index}`} // Retain this key for badges
+                key={`${badge.name}-${index}`}
                 className="flex flex-col items-center transition-transform hover:scale-110"
               >
                 <div className="w-24 h-24 overflow-hidden">
