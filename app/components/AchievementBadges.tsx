@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 interface Badge {
   name: string;
@@ -8,12 +8,10 @@ interface Badge {
 interface Certificate {
   name: string;
   image: string;
-  id: string; // Keeping the id for the key prop, but not displaying it
+  id: string;
 }
 
 const AchievementBadges: React.FC = () => {
-  const [isPaused, setIsPaused] = useState<boolean>(false);
-
   const containerRefs = {
     badges: useRef<HTMLDivElement | null>(null),
     certificates: useRef<HTMLDivElement | null>(null),
@@ -58,7 +56,7 @@ const AchievementBadges: React.FC = () => {
 
   useEffect(() => {
     const autoScroll = (container: HTMLDivElement | null, reverse = false) => {
-      if (container && !isPaused) {
+      if (container) {
         const scrollAmount = reverse ? -1 : 1;
         container.scrollLeft += scrollAmount;
 
@@ -85,7 +83,7 @@ const AchievementBadges: React.FC = () => {
     return () => {
       Object.values(intervals).forEach(clearInterval);
     };
-  }, [isPaused]);
+  }, []);
 
   const ScrollingSection: React.FC<{
     items: Badge[] | Certificate[];
