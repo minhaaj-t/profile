@@ -25,7 +25,7 @@ export default function Home() {
 
   const codeLines = [
     "const portfolio = {",
-    "  name: 'minhaj.pro',",
+    "  name: 'minhaj.pro''V1.05',",
     "  status: 'initializing...'",
     "};",
     "",
