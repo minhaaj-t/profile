@@ -4,7 +4,6 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Github, Linkedin, Mail, Moon, Sun, Menu, X } from "lucide-react";
 import { ProjectCard } from "./components/ProjectCard";
 import PortfolioHome from "./components/PortfolioHome";
-import { SkillCard } from "./components/SkillCard";
 import { ContactForm } from "./components/ContactForm";
 import { CircularNavbar } from "./components/CircularNavbar";
 import { SocialMediaGrid } from "./components/SocialMediaGrid";
@@ -13,6 +12,7 @@ import { IframeModal } from "./components/IframeModal";
 import BackgroundAnimation from "./components/BackgroundAnimation";
 import AIBotButton from "./components/AIBotButton";
 import GradientTitle from "./components/GradientTitle";
+import ResumePage from "./components/ResumePage";
 
 export default function Home() {
   const [isDarkMode, setIsDarkMode] = useState(true);
@@ -351,14 +351,7 @@ export default function Home() {
           id="skills"
           className={`py-16 ${activeSection === "skills" ? "block" : "hidden"}`}
         >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <GradientTitle>Skills</GradientTitle>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {skills.map((skill, index) => (
-                <SkillCard key={index} skill={skill} isDarkMode={isDarkMode} />
-              ))}
-            </div>
-          </div>
+          <ResumePage />
         </section>
 
         <section

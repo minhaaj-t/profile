@@ -11,6 +11,8 @@ export const ContactForm: React.FC<ContactFormProps> = ({ isDarkMode }) => {
     message: "",
   });
 
+  const [activeQuestion, setActiveQuestion] = useState<number | null>(null);
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -21,83 +23,166 @@ export const ContactForm: React.FC<ContactFormProps> = ({ isDarkMode }) => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // Handle form submission logic here
-    console.log("Form submitted:", formData);
-    // Reset form after submission
-    setFormData({ name: "", email: "", message: "" });
+  const toggleAnswer = (index: number) => {
+    setActiveQuestion(activeQuestion === index ? null : index);
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className={`p-8 rounded-lg shadow-lg ${
-        isDarkMode ? "bg-gray-800" : "bg-white"
-      }`}
+    <div
+      className={`space-y-12 ${isDarkMode ? "text-white" : "text-gray-800"}`}
     >
-      <div className="space-y-4">
-        <div>
-          <label htmlFor="name" className="block text-sm font-medium mb-1">
-            Name
-          </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-            className={`w-full px-4 py-2 rounded-lg border ${
-              isDarkMode
-                ? "bg-gray-700 border-gray-600"
-                : "bg-white border-gray-300"
-            }`}
-          />
+      {/* FAQ Section */}
+      <div>
+        <h2 className="text-3xl font-bold mb-6">FAQ</h2>
+        <div className="space-y-4">
+          {[
+            {
+              question: "How quickly will I receive a response?",
+              answer:
+                "We aim to respond within 24 hours of receiving your message.",
+            },
+            {
+              question: "Can I reach out directly?",
+              answer:
+                "Yes! Check the contact details below for direct communication.",
+            },
+          ].map((faq, index) => (
+            <div
+              key={index}
+              className={`p-4 rounded-lg shadow-md ${
+                isDarkMode ? "bg-gray-700" : "bg-gray-100"
+              }`}
+            >
+              <button
+                onClick={() => toggleAnswer(index)}
+                className="w-full text-left font-semibold flex justify-between items-center"
+              >
+                <span>{faq.question}</span>
+                <span className="text-xl">
+                  {activeQuestion === index ? "−" : "+"}
+                </span>
+              </button>
+              {activeQuestion === index && (
+                <p className="mt-2 text-sm">{faq.answer}</p>
+              )}
+            </div>
+          ))}
         </div>
-        <div>
-          <label htmlFor="email" className="block text-sm font-medium mb-1">
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            className={`w-full px-4 py-2 rounded-lg border ${
-              isDarkMode
-                ? "bg-gray-700 border-gray-600"
-                : "bg-white border-gray-300"
-            }`}
-          />
-        </div>
-        <div>
-          <label htmlFor="message" className="block text-sm font-medium mb-1">
-            Message
-          </label>
-          <textarea
-            id="message"
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            required
-            rows={4}
-            className={`w-full px-4 py-2 rounded-lg border ${
-              isDarkMode
-                ? "bg-gray-700 border-gray-600"
-                : "bg-white border-gray-300"
-            }`}
-          ></textarea>
-        </div>
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 mt-4"
-        >
-          Send Message
-        </button>
       </div>
-    </form>
+
+      {/* Contact Form */}
+      <form
+        action="https://formsubmit.co/minhajt.uae@gmail.com"
+        method="POST"
+        className={`p-8 rounded-lg shadow-lg ${
+          isDarkMode ? "bg-gray-800" : "bg-white"
+        }`}
+      >
+        <input
+          type="hidden"
+          name="_subject"
+          value="New Contact Form Submission"
+        />
+        <input
+          type="hidden"
+          name="_autoresponse"
+          value="Thank you for your message! We'll get back to you shortly."
+        />
+        <div className="space-y-4">
+          <div>
+            <label htmlFor="name" className="block text-sm font-medium mb-1">
+              Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+              className={`w-full px-4 py-2 rounded-lg border ${
+                isDarkMode
+                  ? "bg-gray-700 border-gray-600 text-white"
+                  : "bg-white border-gray-300"
+              }`}
+            />
+          </div>
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium mb-1">
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className={`w-full px-4 py-2 rounded-lg border ${
+                isDarkMode
+                  ? "bg-gray-700 border-gray-600 text-white"
+                  : "bg-white border-gray-300"
+              }`}
+            />
+          </div>
+          <div>
+            <label htmlFor="message" className="block text-sm font-medium mb-1">
+              Message
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              required
+              rows={4}
+              className={`w-full px-4 py-2 rounded-lg border ${
+                isDarkMode
+                  ? "bg-gray-700 border-gray-600 text-white"
+                  : "bg-white border-gray-300"
+              }`}
+            ></textarea>
+          </div>
+          <button
+            type="submit"
+            className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 mt-4"
+          >
+            Send Message
+          </button>
+        </div>
+      </form>
+
+      {/* Contact Details */}
+      <div>
+        <h2 className="text-2xl font-bold mb-4">Contact Details</h2>
+        <div
+          className={`p-4 rounded-lg shadow-md ${
+            isDarkMode ? "bg-gray-700" : "bg-gray-100"
+          }`}
+        >
+          <p>
+            <span className="font-semibold mr-2">📧</span>
+            <a
+              href="mailto:minhajt.uae@gmail.com"
+              className="text-blue-500 hover:underline"
+            >
+              minhajt.uae@gmail.com
+            </a>
+          </p>
+          <p>
+            <span className="font-semibold mr-2">📞</span>
+            <a
+              href="tel:+971558291800"
+              className="text-blue-500 hover:underline"
+            >
+              +971 55 829 1800
+            </a>
+          </p>
+          <p>
+            <span className="font-semibold mr-2">📍</span> Ajman, UAE
+          </p>
+        </div>
+      </div>
+    </div>
   );
 };

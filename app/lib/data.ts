@@ -187,42 +187,42 @@ export const skills = [
 export const socialPosts = [
   {
     id: 1,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "https://picsum.photos/200/300?random=1",
     caption: "Working on a new exciting project! #coding #webdev",
   },
   {
     id: 2,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "https://picsum.photos/200/300?random=2",
     caption: "Just launched my latest app! Check it out #newrelease",
   },
   {
     id: 3,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "https://picsum.photos/200/300?random=3",
     caption: "Attending a tech conference #learning #networking",
   },
   {
     id: 4,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "https://picsum.photos/200/300?random=4",
     caption: "Beautiful sunset from my coding spot #worklifebalance",
   },
   {
     id: 5,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "https://picsum.photos/200/300?random=5",
     caption: "Celebrating a successful deployment #teamwork",
   },
   {
     id: 6,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "https://picsum.photos/200/300?random=6",
     caption: "My desk setup for maximum productivity #workfromhome",
   },
   {
     id: 7,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "https://picsum.photos/200/300?random=7",
     caption: "Brainstorming session with the team #innovation",
   },
   {
     id: 8,
-    image: "/placeholder.svg?height=300&width=300",
+    image: "https://picsum.photos/200/300?random=8",
     caption: "Just solved a tricky bug! #debugging #victory",
   },
 ];
