@@ -303,7 +303,7 @@ export default function Home() {
                     onClick={() => handleNavigation("contact")}
                     className="mt-3 sm:mt-0 inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-blue-600 bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                   >
-                    Contact Me
+                    ‎ Contact Me‎
                   </button>
                 </div>
 
