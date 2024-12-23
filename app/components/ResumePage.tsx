@@ -86,11 +86,11 @@ const ResumePage = () => {
             onClick={toggleDarkMode}
             className={`px-4 py-2 rounded shadow transition-opacity bg-gray-200 dark:bg-gray-800 ${
               isDarkMode
-                ? "opacity-30 hover:opacity-100"
-                : "opacity-100 hover:opacity-30"
-            } text-black`}
+                ? "opacity-30 hover:opacity-100  text-black"
+                : "opacity-100 hover:opacity-30  text-white"
+            }`}
           >
-            {isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+            {isDarkMode ? "Exploring Options" : "Exploring New Options"}
           </button>
         </div>
 

@@ -33,7 +33,7 @@ const AIBotButton: React.FC<{ onClick: () => void }> = ({ onClick }) => {
       >
         {/* GIF Image */}
         <img
-          src="https://i.postimg.cc/qBDdscQT/giphy.gif"
+          src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjN1eDkxancyOGltY3N5dW82M2N3eW9zZjBmOTMyenh4dWR6dmNjYiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/uZm0pXOiivOlp3bWqm/giphy.gif"
           alt="GIF"
           className="w-full h-full object-cover rounded-full shadow-inner transition-shadow duration-300"
           style={{
