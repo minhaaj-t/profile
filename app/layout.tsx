@@ -1,15 +1,23 @@
+// app/layout.tsx
+
+import React from "react";
+import { Inter } from "next/font/google";
+import "./globals.css";
+
+const inter = Inter({ subsets: ["latin"] });
+
 export const metadata = {
   title: "Muhammed Minhaj Mahroof - Full Stack Developer Portfolio",
   description:
-    "Explore the portfolio of Muhammed Minhaj Mahroof, a passionate Full Stack Developer dedicated to creating seamless, user-centric applications that solve real-world problems.",
-  author: "MiNHAJ", // Author name
+    "Explore the portfolio of Muhammed Minhaj Mahroof, a passionate Full Stack Developer based in the UAE, offering web development, mobile apps, React.js, Node.js, JavaScript, PHP, Laravel, and cloud solutions. Specializing in creating seamless, user-centric applications that solve real-world problems.",
+  author: "MiNHAJ", // Author
+  date: "2024-12-24", // Publication date (you can adjust to your specific date)
+
   openGraph: {
     title: "Muhammed Minhaj Mahroof - Full Stack Developer Portfolio",
     description:
       "Explore the portfolio of Muhammed Minhaj Mahroof, a passionate Full Stack Developer dedicated to creating seamless, user-centric applications that solve real-world problems.",
     url: "https://minhaj.pro/",
-    author: "MiNHAJ",
-    date: "2024-12-24",
     site_name: "Muhammed Minhaj Mahroof",
     images: [
       {
@@ -31,7 +39,7 @@ export const metadata = {
   linkedin: {
     image: "https://scastiel.dev/api/image/minhaaj-t?dark&removeLink", // LinkedIn meta image
   },
-  themeColor: "#000000", // Default theme color for light mode
+
   google: {
     search: {
       country: ["AE", "DE", "US", "IN"],
@@ -269,25 +277,25 @@ export const metadata = {
     },
   },
 };
-
+export const viewport = {
+  themeColor: "#000000", // Set default theme color for light mode
+};
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <head>
-        {/* Dark Mode Theme Color */}
-        <meta
-          name="theme-color"
-          content="#121212"
-          media="(prefers-color-scheme: dark)"
-        />
-        {/* Light Mode Theme Color */}
-        <meta name="theme-color" content="#FFFFFF" />
-      </head>
-      <body>{children}</body>
+    <html lang="en" className="dark">
+      {/* Dark Mode Theme Color */}
+      <meta
+        name="theme-color"
+        content="#121212"
+        media="(prefers-color-scheme: dark)"
+      />
+      {/* Light Mode Theme Color */}
+      <meta name="theme-color" content="#FFFFFF" />
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }
