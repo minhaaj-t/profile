@@ -31,45 +31,6 @@ export const ContactForm: React.FC<ContactFormProps> = ({ isDarkMode }) => {
     <div
       className={`space-y-12 ${isDarkMode ? "text-white" : "text-gray-800"}`}
     >
-      {/* FAQ Section */}
-      <div>
-        <h2 className="text-3xl font-bold mb-6">FAQ</h2>
-        <div className="space-y-4">
-          {[
-            {
-              question: "How quickly will I receive a response?",
-              answer:
-                "We aim to respond within 24 hours of receiving your message.",
-            },
-            {
-              question: "Can I reach out directly?",
-              answer:
-                "Yes! Check the contact details below for direct communication.",
-            },
-          ].map((faq, index) => (
-            <div
-              key={index}
-              className={`p-4 rounded-lg shadow-md ${
-                isDarkMode ? "bg-gray-700" : "bg-gray-100"
-              }`}
-            >
-              <button
-                onClick={() => toggleAnswer(index)}
-                className="w-full text-left font-semibold flex justify-between items-center"
-              >
-                <span>{faq.question}</span>
-                <span className="text-xl">
-                  {activeQuestion === index ? "−" : "+"}
-                </span>
-              </button>
-              {activeQuestion === index && (
-                <p className="mt-2 text-sm">{faq.answer}</p>
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
-
       {/* Contact Form */}
       <form
         action="https://formsubmit.co/minhajt.uae@gmail.com"
@@ -151,6 +112,55 @@ export const ContactForm: React.FC<ContactFormProps> = ({ isDarkMode }) => {
           </button>
         </div>
       </form>
+
+      {/* FAQ Section */}
+      <div>
+        <h2 className="text-3xl font-bold mb-6">FAQ</h2>
+        <div className="space-y-4">
+          {[
+            {
+              question: "What services do I offer?",
+              answer:
+                "I offer a range of services including graphic design,TALL stack or MERN stack web development, React Native mobile app development, and digital marketing.",
+            },
+            {
+              question: "What technologies do I use for web development?",
+              answer:
+                "I utilize a variety of technologies including HTML, CSS, JavaScript, and the MERN stack (MongoDB, Express.js, React, Node.js) for web development.",
+            },
+            {
+              question: "How can clients contact me?",
+              answer:
+                "Clients can reach out through my personal portfolio or directly via phone at +971 55 829 1800.",
+            },
+            {
+              question: "Do I have any recommendations from clients?",
+              answer:
+                "Yes! I've received positive testimonials from clients highlighting my problem-solving abilities, expertise in React Native, and commitment to delivering high-quality work.",
+            },
+          ].map((faq, index) => (
+            <div
+              key={index}
+              className={`p-4 rounded-lg shadow-md ${
+                isDarkMode ? "bg-gray-700" : "bg-gray-100"
+              }`}
+            >
+              <button
+                onClick={() => toggleAnswer(index)}
+                className="w-full text-left font-semibold flex justify-between items-center"
+              >
+                <span>{faq.question}</span>
+                <span className="text-xl">
+                  {activeQuestion === index ? "−" : "+"}
+                </span>
+              </button>
+              {activeQuestion === index && (
+                <p className="mt-2 text-sm">{faq.answer}</p>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
 
       {/* Contact Details */}
       <div>
