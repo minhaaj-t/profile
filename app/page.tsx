@@ -7,7 +7,7 @@ import PortfolioHome from "./components/PortfolioHome";
 import { ContactForm } from "./components/ContactForm";
 import { CircularNavbar } from "./components/CircularNavbar";
 import { SocialMediaGrid } from "./components/SocialMediaGrid";
-import { projects, skills, socialPosts } from "./lib/data";
+import { projects, socialPosts } from "./lib/data";
 import { IframeModal } from "./components/IframeModal";
 import BackgroundAnimation from "./components/BackgroundAnimation";
 import AIBotButton from "./components/AIBotButton";
