@@ -62,14 +62,14 @@ const ResumePage = () => {
       role: "CTO at TechCorp",
       testimonial:
         "Minhaj's work is incredible. He has a great eye for detail.",
-      imgSrc: "https://via.placeholder.com/80",
+      imgSrc: "https://i.pravatar.cc/150?img=12",
     },
     {
       name: "Jane Smith",
       role: "CEO at NewTech Solutions",
       testimonial:
         "Working with Minhaj has been an excellent experience, delivering high-quality work on time.",
-      imgSrc: "https://via.placeholder.com/80",
+      imgSrc: "https://i.pravatar.cc/150?img=61",
     },
   ];
 
