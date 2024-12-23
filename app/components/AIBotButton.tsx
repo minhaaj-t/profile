@@ -11,7 +11,7 @@ const AIBotButton: React.FC<{ onClick: () => void }> = ({ onClick }) => {
 
   return (
     <div
-      className="fixed bottom-24 right-8 z-50 p-0 w-16 h-16 sm:w-10 sm:h-10 lg:w-14 lg:h-14 rounded-full transform transition-all duration-500 hover:scale-110 focus:outline-none"
+      className="fixed bottom-24 right-8 z-50 p-0 w-14 h-14 sm:w-8 sm:h-8 lg:w-14 lg:h-14 rounded-full transform transition-all duration-500 hover:scale-110 focus:outline-none"
       style={{
         // Adjust outer shadow based on light or dark mode with custom shadow color in dark mode
         boxShadow: hovered
