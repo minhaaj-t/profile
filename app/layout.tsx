@@ -8,6 +8,8 @@ export const metadata = {
     description:
       "Explore the portfolio of Muhammed Minhaj Mahroof, a passionate Full Stack Developer dedicated to creating seamless, user-centric applications that solve real-world problems.",
     url: "https://minhaj.pro/",
+    author: "MiNHAJ", // Author
+    date: "2024-12-24", // Publication date (you can adjust to your specific date)
     site_name: "Muhammed Minhaj Mahroof",
     images: [
       {
