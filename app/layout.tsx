@@ -1,19 +1,12 @@
-// app/layout.tsx
-
-import React from "react";
-import { Inter } from "next/font/google";
-import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
-
 export const metadata = {
   title: "Muhammed Minhaj Mahroof - Full Stack Developer Portfolio",
   description:
-    "Explore the portfolio of Muhammed Minhaj Mahroof, a passionate Full Stack Developer based in the UAE, offering web development, mobile apps, React.js, Node.js, JavaScript, PHP, Laravel, and cloud solutions. Specializing in creating seamless, user-centric applications that solve real-world problems.",
+    "Explore the portfolio of Muhammed Minhaj Mahroof, a passionate Full Stack Developer dedicated to creating seamless, user-centric applications that solve real-world problems.",
+  author: "MiNHAJ", // Author name
   openGraph: {
     title: "Muhammed Minhaj Mahroof - Full Stack Developer Portfolio",
     description:
-      "Explore the portfolio of Muhammed Minhaj Mahroof, a Full Stack Developer specializing in web development, mobile apps, React.js, Node.js, JavaScript, PHP, Laravel, and cloud solutions. Based in UAE, India, Germany, and the US.",
+      "Explore the portfolio of Muhammed Minhaj Mahroof, a passionate Full Stack Developer dedicated to creating seamless, user-centric applications that solve real-world problems.",
     url: "https://minhaj.pro/",
     site_name: "Muhammed Minhaj Mahroof",
     images: [
@@ -30,9 +23,13 @@ export const metadata = {
     site: "@minhaj_pro",
     title: "Muhammed Minhaj Mahroof - Full Stack Developer Portfolio",
     description:
-      "Explore the portfolio of Muhammed Minhaj Mahroof, a passionate Full Stack Developer offering web development, mobile apps, and more. Focused on solutions in React.js, Node.js, JavaScript, Laravel, and cloud technologies.",
+      "Explore the portfolio of Muhammed Minhaj Mahroof, a passionate Full Stack Developer dedicated to creating seamless, user-centric applications that solve real-world problems.",
     image: "https://scastiel.dev/api/image/minhaaj-t?dark&removeLink",
   },
+  linkedin: {
+    image: "https://scastiel.dev/api/image/minhaaj-t?dark&removeLink", // LinkedIn meta image
+  },
+  themeColor: "#000000", // Default theme color for light mode
   google: {
     search: {
       country: ["AE", "DE", "US", "IN"],
@@ -277,16 +274,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark">
-      {/* Dark Mode Theme Color */}
-      <meta
-        name="theme-color"
-        content="#121212"
-        media="(prefers-color-scheme: dark)"
-      />
-      {/* Light Mode Theme Color */}
-      <meta name="theme-color" content="#FFFFFF" />
-      <body className={inter.className}>{children}</body>
+    <html lang="en">
+      <head>
+        {/* Dark Mode Theme Color */}
+        <meta
+          name="theme-color"
+          content="#121212"
+          media="(prefers-color-scheme: dark)"
+        />
+        {/* Light Mode Theme Color */}
+        <meta name="theme-color" content="#FFFFFF" />
+      </head>
+      <body>{children}</body>
     </html>
   );
 }
