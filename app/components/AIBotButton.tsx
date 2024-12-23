@@ -48,6 +48,70 @@ const AIBotButton: React.FC<{ onClick: () => void }> = ({ onClick }) => {
               : "inset 0 4px 12px rgba(0, 0, 0, 0.5)", // Regular inner shadow for light mode
           }}
         />
+
+        {/* SVG Animation */}
+        <svg
+          viewBox="0 0 120 120"
+          xmlns="http://www.w3.org/2000/svg"
+          width="40"
+          height="40"
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+        >
+          <circle cx="30" cy="60" r="5" fill="white">
+            <animate
+              attributeName="opacity"
+              values="0;1;0"
+              dur="1s"
+              begin="0s"
+              repeatCount="indefinite"
+              keyTimes="0;0.5;1"
+            />
+            <animate
+              attributeName="r"
+              values="5;10;5"
+              dur="1s"
+              begin="0s"
+              repeatCount="indefinite"
+              keyTimes="0;0.5;1"
+            />
+          </circle>
+          <circle cx="60" cy="60" r="5" fill="white">
+            <animate
+              attributeName="opacity"
+              values="0;1;0"
+              dur="1s"
+              begin="0.3s"
+              repeatCount="indefinite"
+              keyTimes="0;0.5;1"
+            />
+            <animate
+              attributeName="r"
+              values="5;10;5"
+              dur="1s"
+              begin="0.3s"
+              repeatCount="indefinite"
+              keyTimes="0;0.5;1"
+            />
+          </circle>
+          <circle cx="90" cy="60" r="5" fill="white">
+            <animate
+              attributeName="opacity"
+              values="0;1;0"
+              dur="1s"
+              begin="0.6s"
+              repeatCount="indefinite"
+              keyTimes="0;0.5;1"
+            />
+            <animate
+              attributeName="r"
+              values="5;10;5"
+              dur="1s"
+              begin="0.6s"
+              repeatCount="indefinite"
+              keyTimes="0;0.5;1"
+            />
+          </circle>
+        </svg>
       </button>
     </div>
   );
