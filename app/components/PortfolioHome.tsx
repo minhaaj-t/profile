@@ -196,11 +196,51 @@ export const PortfolioHome: React.FC = () => {
       {/* Header */}
       <header className="py-16 px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <p className="text-lg text-gray-600 dark:text-gray-300 flex items-center justify-center gap-2">
+          <p
+            className="text-lg text-gray-600 dark:text-gray-300 flex items-center justify-center gap-2"
+            style={{ marginBottom: "20px" }}
+          >
             <span>📍</span> Ajman, United Arab Emirates
           </p>
-          <Button onClick={toggleDarkMode} className="mt-4">
-            Toggle Dark Mode
+          <Button onClick={toggleDarkMode}>
+            <div
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
+                color: "#ffffff",
+                borderRadius: "8px",
+                border: "none",
+                cursor: "pointer",
+              }}
+            >
+              AVAILABLE NOW
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 100 100"
+                width="20px"
+                height="20px"
+                style={{
+                  animation: "pulse 1.5s infinite",
+                  overflow: "visible",
+                }}
+              >
+                <circle cx="50" cy="50" r="40" fill="#32CD32">
+                  <animate
+                    attributeName="r"
+                    values="40;45;40"
+                    dur="1.5s"
+                    repeatCount="indefinite"
+                  />
+                  <animate
+                    attributeName="opacity"
+                    values="1;0.7;1"
+                    dur="1.5s"
+                    repeatCount="indefinite"
+                  />
+                </circle>
+              </svg>
+            </div>
           </Button>
         </div>
       </header>
