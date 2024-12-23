@@ -278,6 +278,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
+      {/* Dark Mode Theme Color */}
+      <meta
+        name="theme-color"
+        content="#121212"
+        media="(prefers-color-scheme: dark)"
+      />
+      {/* Light Mode Theme Color */}
+      <meta name="theme-color" content="#FFFFFF" />
       <body className={inter.className}>{children}</body>
     </html>
   );
