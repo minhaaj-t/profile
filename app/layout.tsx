@@ -362,10 +362,10 @@ export default function RootLayout({
         <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
         <script>
           {`
-            AOS.init({
-              duration: 1200, // Animation duration
-            });
-          `}
+    AOS.init({
+      duration: 1200, // Animation duration
+    });
+  `}
         </script>
       </body>
     </html>
