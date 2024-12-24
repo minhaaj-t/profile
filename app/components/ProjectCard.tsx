@@ -23,7 +23,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   project,
   isDarkMode,
 }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false); // Ensure useState is imported
 
   return (
     <div
