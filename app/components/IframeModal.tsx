@@ -18,20 +18,17 @@ export const IframeModal: React.FC<IframeModalProps> = ({
     setIsLoading(false);
   };
 
+  const handleIframeLoad = () => {
+    setIsLoading(false);
+    setHasError(false); // Reset error state if loading succeeds
+  };
+
   useEffect(() => {
-    let timer: NodeJS.Timeout;
-
     if (isOpen) {
-      // Set a timeout to detect iframe load issues
-      timer = setTimeout(() => {
-        if (isLoading) {
-          setHasError(true);
-        }
-      }, 7000); // 7 seconds timeout
+      setHasError(false); // Reset error state when modal is reopened
+      setIsLoading(true); // Reset loading state when modal is reopened
     }
-
-    return () => clearTimeout(timer);
-  }, [isOpen, isLoading]);
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -82,9 +79,7 @@ export const IframeModal: React.FC<IframeModalProps> = ({
                 src="https://www.arsturn.com/minhaj"
                 className="absolute inset-0 w-full h-full"
                 title="AI Assistant"
-                onLoad={() => {
-                  setIsLoading(false);
-                }}
+                onLoad={handleIframeLoad}
                 onError={handleIframeError}
                 sandbox="allow-scripts allow-same-origin"
               />
