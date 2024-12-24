@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { X } from "lucide-react";
 
 interface IframeModalProps {
@@ -10,6 +10,24 @@ export const IframeModal: React.FC<IframeModalProps> = ({
   isOpen,
   onClose,
 }) => {
+  const [hasError, setHasError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+
+    if (isOpen) {
+      // Set a timeout to detect if the iframe fails to load
+      timer = setTimeout(() => {
+        if (isLoading) {
+          setHasError(true);
+        }
+      }, 5000); // Adjust timeout as needed
+    }
+
+    return () => clearTimeout(timer);
+  }, [isOpen, isLoading]);
+
   if (!isOpen) return null;
 
   return (
@@ -30,11 +48,43 @@ export const IframeModal: React.FC<IframeModalProps> = ({
           </button>
         </div>
         <div className="flex-1 relative">
-          <iframe
-            src="https://www.arsturn.com/minhaj"
-            className="absolute inset-0 w-full h-full"
-            title="AI Assistant"
-          />
+          {hasError ? (
+            <div className="flex flex-col items-center justify-center h-full text-center p-4">
+              <p className="text-lg font-semibold text-red-600">
+                The webpage could not be loaded.
+              </p>
+              <p className="mt-2 text-gray-600 dark:text-gray-300">
+                If you can't open the screen, please try opening this website in
+                another browser:
+              </p>
+              <a
+                href="https://www.arsturn.com/minhaj"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+              >
+                Open in Browser
+              </a>
+            </div>
+          ) : (
+            <>
+              {isLoading && (
+                <div className="absolute inset-0 flex items-center justify-center bg-white dark:bg-gray-800 z-10">
+                  <p className="text-gray-500">Loading...</p>
+                </div>
+              )}
+              <iframe
+                src="https://www.arsturn.com/minhaj"
+                className="absolute inset-0 w-full h-full"
+                title="AI Assistant"
+                onLoad={() => {
+                  setIsLoading(false);
+                  setHasError(false);
+                }}
+                sandbox="allow-scripts allow-same-origin"
+              />
+            </>
+          )}
         </div>
       </div>
     </div>
