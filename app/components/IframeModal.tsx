@@ -17,12 +17,12 @@ export const IframeModal: React.FC<IframeModalProps> = ({
     let timer: NodeJS.Timeout;
 
     if (isOpen) {
-      // Set a timeout to detect if the iframe fails to load
+      // Set a timeout to detect iframe load issues
       timer = setTimeout(() => {
         if (isLoading) {
           setHasError(true);
         }
-      }, 5000); // Adjust timeout as needed
+      }, 5000); // 5 seconds timeout
     }
 
     return () => clearTimeout(timer);
@@ -51,11 +51,11 @@ export const IframeModal: React.FC<IframeModalProps> = ({
           {hasError ? (
             <div className="flex flex-col items-center justify-center h-full text-center p-4">
               <p className="text-lg font-semibold text-red-600">
-                The webpage could not be loaded.
+                Unable to load the content.
               </p>
               <p className="mt-2 text-gray-600 dark:text-gray-300">
-                If you can&apos;t open the screen, please try opening this
-                website in another browser:
+                The content couldn&apos;t be displayed in this browser. Please
+                open the link in an external browser:
               </p>
               <a
                 href="https://www.arsturn.com/minhaj"
@@ -63,7 +63,7 @@ export const IframeModal: React.FC<IframeModalProps> = ({
                 rel="noopener noreferrer"
                 className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
               >
-                Open in Browser
+                Open in External Browser
               </a>
             </div>
           ) : (
