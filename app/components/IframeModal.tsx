@@ -12,23 +12,27 @@ export const IframeModal: React.FC<IframeModalProps> = ({
 }) => {
   const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [retryCount, setRetryCount] = useState(0);
 
-  const handleIframeError = () => {
-    setHasError(true);
-    setIsLoading(false);
-  };
-
-  const handleIframeLoad = () => {
-    setIsLoading(false);
-    setHasError(false); // Reset error state if loading succeeds
-  };
+  const maxRetries = 3; // Maximum number of retries
 
   useEffect(() => {
+    let timer: NodeJS.Timeout;
+
     if (isOpen) {
-      setHasError(false); // Reset error state when modal is reopened
-      setIsLoading(true); // Reset loading state when modal is reopened
+      // Set a timeout to detect if the iframe fails to load
+      timer = setTimeout(() => {
+        if (isLoading && retryCount < maxRetries) {
+          setRetryCount(retryCount + 1);
+          setIsLoading(true); // Trigger reloading
+        } else if (retryCount >= maxRetries) {
+          setHasError(true); // Show error after max retries
+        }
+      }, 5000); // Adjust timeout as needed
     }
-  }, [isOpen]);
+
+    return () => clearTimeout(timer);
+  }, [isOpen, isLoading, retryCount]);
 
   if (!isOpen) return null;
 
@@ -53,11 +57,11 @@ export const IframeModal: React.FC<IframeModalProps> = ({
           {hasError ? (
             <div className="flex flex-col items-center justify-center h-full text-center p-4">
               <p className="text-lg font-semibold text-red-600">
-                Unable to load the content.
+                The webpage could not be loaded.
               </p>
               <p className="mt-2 text-gray-600 dark:text-gray-300">
-                The content couldn&apos;t be displayed in this browser. Please
-                open the link in an external browser:
+                If you can&apos;t open the screen, please try opening this
+                website in another browser:
               </p>
               <a
                 href="https://www.arsturn.com/minhaj"
@@ -65,7 +69,7 @@ export const IframeModal: React.FC<IframeModalProps> = ({
                 rel="noopener noreferrer"
                 className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
               >
-                Open in External Browser
+                Open in Browser
               </a>
             </div>
           ) : (
@@ -79,8 +83,14 @@ export const IframeModal: React.FC<IframeModalProps> = ({
                 src="https://www.arsturn.com/minhaj"
                 className="absolute inset-0 w-full h-full"
                 title="AI Assistant"
-                onLoad={handleIframeLoad}
-                onError={handleIframeError}
+                onLoad={() => {
+                  setIsLoading(false);
+                  setHasError(false);
+                }}
+                onError={() => {
+                  setIsLoading(false);
+                  setHasError(true);
+                }}
                 sandbox="allow-scripts allow-same-origin"
               />
             </>
