@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Script from "next/script"; // Import Script component from Next.js to load external JS
 import { Inter } from "next/font/google";
 import "./globals.css";
