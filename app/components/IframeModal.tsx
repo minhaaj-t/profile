@@ -13,6 +13,11 @@ export const IframeModal: React.FC<IframeModalProps> = ({
   const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
+  const handleIframeError = () => {
+    setHasError(true);
+    setIsLoading(false);
+  };
+
   useEffect(() => {
     let timer: NodeJS.Timeout;
 
@@ -22,7 +27,7 @@ export const IframeModal: React.FC<IframeModalProps> = ({
         if (isLoading) {
           setHasError(true);
         }
-      }, 5000); // 5 seconds timeout
+      }, 7000); // 7 seconds timeout
     }
 
     return () => clearTimeout(timer);
@@ -79,8 +84,8 @@ export const IframeModal: React.FC<IframeModalProps> = ({
                 title="AI Assistant"
                 onLoad={() => {
                   setIsLoading(false);
-                  setHasError(false);
                 }}
+                onError={handleIframeError}
                 sandbox="allow-scripts allow-same-origin"
               />
             </>

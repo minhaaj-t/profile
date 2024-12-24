@@ -1,45 +1,43 @@
-// app/layout.tsx
-
 import React from "react";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import "aos/dist/aos.css"; // Import AOS styles
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Muhammed Minhaj Mahroof - Full Stack Developer Portfolio",
+  title: "MiNHAJ - Full Stack Developer | Innovator & Tech Enthusiast",
   description:
-    "Explore the portfolio of Muhammed Minhaj Mahroof, a passionate Full Stack Developer based in the UAE, offering web development, mobile apps, React.js, Node.js, JavaScript, PHP, Laravel, and cloud solutions. Specializing in creating seamless, user-centric applications that solve real-world problems.",
-  author: "MiNHAJ", // Author
-  date: "2024-12-24", // Publication date (you can adjust to your specific date)
+    "MiNHAJ, a versatile Full Stack Developer, Innovator, and Tech Enthusiast based in the UAE. Specializing in web development, mobile apps, React.js, Node.js, PHP, Laravel, and cloud solutions, MiNHAJ creates innovative, user-focused applications that solve real-world problems.",
+  author: "MiNHAJ",
+  date: "2024-12-24",
 
   openGraph: {
-    title: "Muhammed Minhaj Mahroof - Full Stack Developer Portfolio",
+    title: "MiNHAJ - Full Stack Developer | Innovator & Tech Enthusiast",
     description:
-      "Explore the portfolio of Muhammed Minhaj Mahroof, a passionate Full Stack Developer dedicated to creating seamless, user-centric applications that solve real-world problems.",
+      "Discover MiNHAJ, an experienced Full Stack Developer and Innovator offering cutting-edge web and app solutions, from concept to delivery.",
     url: "https://minhaj.pro/",
-    site_name: "Muhammed Minhaj Mahroof",
+    site_name: "MiNHAJ - Full Stack Developer Portfolio",
     images: [
       {
         url: "https://scastiel.dev/api/image/minhaaj-t?dark&removeLink",
         width: 1200,
         height: 630,
-        alt: "Muhammed Minhaj Mahroof - Full Stack Developer Portfolio",
+        alt: "MiNHAJ - Full Stack Developer Portfolio",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     site: "@minhaj_pro",
-    title: "Muhammed Minhaj Mahroof - Full Stack Developer Portfolio",
+    title: "MiNHAJ - Full Stack Developer | Innovator & Tech Enthusiast",
     description:
-      "Explore the portfolio of Muhammed Minhaj Mahroof, a passionate Full Stack Developer dedicated to creating seamless, user-centric applications that solve real-world problems.",
+      "Explore MiNHAJ's portfolio to see how he combines innovation and technical expertise to create seamless, user-centric web and app solutions.",
     image: "https://scastiel.dev/api/image/minhaaj-t?dark&removeLink",
   },
   linkedin: {
-    image: "https://scastiel.dev/api/image/minhaaj-t?dark&removeLink", // LinkedIn meta image
+    image: "https://scastiel.dev/api/image/minhaaj-t?dark&removeLink",
   },
-
   google: {
     search: {
       country: ["AE", "DE", "US", "IN"],
@@ -277,9 +275,11 @@ export const metadata = {
     },
   },
 };
+
 export const viewport = {
-  themeColor: "#000000", // Set default theme color for light mode
+  themeColor: "#000000",
 };
+
 export default function RootLayout({
   children,
 }: {
@@ -287,15 +287,87 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      {/* Dark Mode Theme Color */}
-      <meta
-        name="theme-color"
-        content="#121212"
-        media="(prefers-color-scheme: dark)"
-      />
-      {/* Light Mode Theme Color */}
-      <meta name="theme-color" content="#FFFFFF" />
-      <body className={inter.className}>{children}</body>
+      <head>
+        {/* Meta Tags for SEO */}
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="robots" content="index, follow" />
+        <meta
+          name="keywords"
+          content="MiNHAJ, Full Stack Developer, UAE Developer, Web Development, Mobile App Development, React.js, Node.js, Laravel, PHP, Cloud Solutions, Tech Innovator"
+        />
+        <meta name="author" content="MiNHAJ" />
+        <meta
+          name="theme-color"
+          content="#121212"
+          media="(prefers-color-scheme: dark)"
+        />
+        <meta
+          name="theme-color"
+          content="#FFFFFF"
+          media="(prefers-color-scheme: light)"
+        />
+
+        {/* Apple iOS Optimization */}
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta
+          name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent"
+        />
+        <meta name="apple-mobile-web-app-title" content="MiNHAJ Portfolio" />
+        <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+
+        {/* Windows Optimization */}
+        <meta name="msapplication-TileColor" content="#000000" />
+        <meta
+          name="msapplication-TileImage"
+          content="/icons/mstile-150x150.png"
+        />
+        <meta name="application-name" content="MiNHAJ Portfolio" />
+
+        {/* Open Graph */}
+        <meta property="og:title" content={metadata.openGraph.title} />
+        <meta
+          property="og:description"
+          content={metadata.openGraph.description}
+        />
+        <meta property="og:image" content={metadata.openGraph.images[0].url} />
+        <meta property="og:url" content={metadata.openGraph.url} />
+        <meta property="og:site_name" content={metadata.openGraph.site_name} />
+        <meta property="og:type" content="website" />
+
+        {/* Twitter Cards */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={metadata.twitter.title} />
+        <meta
+          name="twitter:description"
+          content={metadata.twitter.description}
+        />
+        <meta name="twitter:image" content={metadata.twitter.image} />
+        <meta name="twitter:site" content={metadata.twitter.site} />
+
+        {/* Icons for All Devices */}
+        <link rel="icon" href="/icons/favicon-32x32.png" sizes="32x32" />
+        <link rel="icon" href="/icons/favicon-16x16.png" sizes="16x16" />
+        <link rel="manifest" href="/manifest.json" />
+
+        {/* AOS for Animation */}
+        <link
+          rel="stylesheet"
+          href="https://unpkg.com/aos@2.3.4/dist/aos.css"
+        />
+      </head>
+      <body className={inter.className}>
+        {children}
+        <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+        <script>
+          {`
+            AOS.init({
+              duration: 1200, // Animation duration
+            });
+          `}
+        </script>
+      </body>
     </html>
   );
 }
