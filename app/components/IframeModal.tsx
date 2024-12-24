@@ -54,8 +54,8 @@ export const IframeModal: React.FC<IframeModalProps> = ({
                 The webpage could not be loaded.
               </p>
               <p className="mt-2 text-gray-600 dark:text-gray-300">
-                If you can't open the screen, please try opening this website in
-                another browser:
+                If you can&apos;t open the screen, please try opening this
+                website in another browser:
               </p>
               <a
                 href="https://www.arsturn.com/minhaj"
