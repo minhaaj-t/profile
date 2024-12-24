@@ -1,46 +1,48 @@
+// app/layout.tsx
+
 import React from "react";
-import Script from "next/script"; // Import Script component from Next.js to load external JS
 import { Inter } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "MiNHAJ - Full Stack Developer | Innovator & Tech Enthusiast",
+  title: "Muhammed Minhaj Mahroof - Full Stack Developer Portfolio",
   description:
-    "MiNHAJ, a versatile Full Stack Developer, Innovator, and Tech Enthusiast based in the UAE. Specializing in web development, mobile apps, React.js, Node.js, PHP, Laravel, and cloud solutions, MiNHAJ creates innovative, user-focused applications that solve real-world problems.",
-  author: "MiNHAJ",
-  date: "2024-12-24",
+    "Explore the portfolio of Muhammed Minhaj Mahroof, a passionate Full Stack Developer based in the UAE, offering web development, mobile apps, React.js, Node.js, JavaScript, PHP, Laravel, and cloud solutions. Specializing in creating seamless, user-centric applications that solve real-world problems.",
+  author: "MiNHAJ", // Author
+  date: "2024-12-24", // Publication date
+
   openGraph: {
-    title: "MiNHAJ - Full Stack Developer | Innovator & Tech Enthusiast",
+    title: "Muhammed Minhaj Mahroof - Full Stack Developer Portfolio",
     description:
-      "Discover MiNHAJ, an experienced Full Stack Developer and Innovator offering cutting-edge web and app solutions, from concept to delivery.",
+      "Explore the portfolio of Muhammed Minhaj Mahroof, a passionate Full Stack Developer dedicated to creating seamless, user-centric applications that solve real-world problems.",
     url: "https://minhaj.pro/",
-    site_name: "MiNHAJ - Full Stack Developer Portfolio",
+    site_name: "Muhammed Minhaj Mahroof",
     images: [
       {
         url: "https://scastiel.dev/api/image/minhaaj-t?dark&removeLink",
         width: 1200,
         height: 630,
-        alt: "MiNHAJ - Full Stack Developer Portfolio",
+        alt: "Muhammed Minhaj Mahroof - Full Stack Developer Portfolio",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     site: "@minhaj_pro",
-    title: "MiNHAJ - Full Stack Developer | Innovator & Tech Enthusiast",
+    title: "Muhammed Minhaj Mahroof - Full Stack Developer Portfolio",
     description:
-      "Explore MiNHAJ's portfolio to see how he combines innovation and technical expertise to create seamless, user-centric web and app solutions.",
+      "Explore the portfolio of Muhammed Minhaj Mahroof, a passionate Full Stack Developer dedicated to creating seamless, user-centric applications that solve real-world problems.",
     image: "https://scastiel.dev/api/image/minhaaj-t?dark&removeLink",
   },
   linkedin: {
-    image: "https://scastiel.dev/api/image/minhaaj-t?dark&removeLink",
+    image: "https://scastiel.dev/api/image/minhaaj-t?dark&removeLink", // LinkedIn meta image
   },
 };
 
 export const viewport = {
-  themeColor: "#000000",
+  themeColor: "#000000", // Set default theme color for light mode
 };
 
 export default function RootLayout({
@@ -50,65 +52,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <head>
-        {/* Meta Tags */}
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="robots" content="index, follow" />
-        <meta
-          name="keywords"
-          content="MiNHAJ, Full Stack Developer, UAE Developer, Web Development, Mobile App Development, React.js, Node.js, Laravel, PHP, Cloud Solutions, Tech Innovator"
-        />
-        <meta name="author" content="MiNHAJ" />
-        <meta
-          name="theme-color"
-          content="#121212"
-          media="(prefers-color-scheme: dark)"
-        />
-        <meta
-          name="theme-color"
-          content="#FFFFFF"
-          media="(prefers-color-scheme: light)"
-        />
-        {/* Open Graph Meta Tags */}
-        <meta property="og:title" content={metadata.openGraph.title} />
-        <meta
-          property="og:description"
-          content={metadata.openGraph.description}
-        />
-        <meta property="og:url" content={metadata.openGraph.url} />
-        <meta property="og:site_name" content={metadata.openGraph.site_name} />
-        <meta property="og:image" content={metadata.openGraph.images[0].url} />
-        <meta
-          property="og:image:width"
-          content={metadata.openGraph.images[0].width.toString()}
-        />
-        <meta
-          property="og:image:height"
-          content={metadata.openGraph.images[0].height.toString()}
-        />
-        <meta
-          property="og:image:alt"
-          content={metadata.openGraph.images[0].alt}
-        />
-        {/* Twitter Card Meta Tags */}
-        <meta name="twitter:card" content={metadata.twitter.card} />
-        <meta name="twitter:site" content={metadata.twitter.site} />
-        <meta name="twitter:title" content={metadata.twitter.title} />
-        <meta
-          name="twitter:description"
-          content={metadata.twitter.description}
-        />
-        <meta name="twitter:image" content={metadata.twitter.image} />
-      </head>
-      <body className={inter.className}>
-        {children}
-        {/* Async Script for AOS (removed AOS initialization logic) */}
-        <Script
-          src="https://unpkg.com/aos@2.3.4/dist/aos.js"
-          strategy="afterInteractive" // Load script after page interaction
-        />
-      </body>
+      {/* Dark Mode Theme Color */}
+      <meta
+        name="theme-color"
+        content="#121212"
+        media="(prefers-color-scheme: dark)"
+      />
+      {/* Light Mode Theme Color */}
+      <meta name="theme-color" content="#FFFFFF" />
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }
