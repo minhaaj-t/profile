@@ -1,17 +1,25 @@
-import React from 'react';
-import { X } from 'lucide-react';
+import React, { useState } from "react";
+import { X } from "lucide-react";
 
 interface IframeModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-export const IframeModal: React.FC<IframeModalProps> = ({ isOpen, onClose }) => {
+export const IframeModal: React.FC<IframeModalProps> = ({
+  isOpen,
+  onClose,
+}) => {
+  const [hasError, setHasError] = useState(false);
+
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-50 overflow-hidden">
-      <div className="absolute inset-0 bg-black bg-opacity-50" onClick={onClose} />
+      <div
+        className="absolute inset-0 bg-black bg-opacity-50"
+        onClick={onClose}
+      />
       <div className="absolute inset-4 sm:inset-8 bg-white dark:bg-gray-800 rounded-lg shadow-xl flex flex-col">
         <div className="flex items-center justify-between p-4 border-b dark:border-gray-700">
           <h2 className="text-lg font-semibold">AI Assistant</h2>
@@ -24,14 +32,34 @@ export const IframeModal: React.FC<IframeModalProps> = ({ isOpen, onClose }) => 
           </button>
         </div>
         <div className="flex-1 relative">
-          <iframe
-            src="https://www.arsturn.com/minhaj"
-            className="absolute inset-0 w-full h-full"
-            title="AI Assistant"
-          />
+          {!hasError ? (
+            <iframe
+              src="https://www.arsturn.com/minhaj"
+              className="absolute inset-0 w-full h-full"
+              title="AI Assistant"
+              onError={() => setHasError(true)}
+            />
+          ) : (
+            <div className="flex flex-col items-center justify-center h-full text-center p-4">
+              <p className="text-lg font-semibold text-red-600">
+                The webpage could not be loaded.
+              </p>
+              <p className="mt-2 text-gray-600 dark:text-gray-300">
+                If you can't open the screen, please try opening this website in
+                another browser:
+              </p>
+              <a
+                href="https://www.arsturn.com/minhaj"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+              >
+                Open in Browser
+              </a>
+            </div>
+          )}
         </div>
       </div>
     </div>
   );
 };
-
