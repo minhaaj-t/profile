@@ -123,21 +123,21 @@ export default function Home() {
                 {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
               </button>
               <a
-                href="#"
+                href="https://github.com/minhaaj-t"
                 className="ml-4 text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
                 aria-label="GitHub profile"
               >
                 <Github size={20} />
               </a>
               <a
-                href="#"
+                href="https://www.linkedin.com/in/minhaj-t/"
                 className="ml-4 text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
                 aria-label="LinkedIn profile"
               >
                 <Linkedin size={20} />
               </a>
               <a
-                href="#"
+                href="minhajt.uae@gmail.com"
                 className="ml-4 text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
                 aria-label="Email contact"
               >
@@ -206,21 +206,21 @@ export default function Home() {
                 {isDarkMode ? "Light Mode" : "Dark Mode"}
               </button>
               <a
-                href="#"
+                href="https://github.com/minhaaj-t"
                 className="flex items-center px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700"
               >
                 <Github size={20} className="mr-2" />
                 GitHub
               </a>
               <a
-                href="#"
+                href="https://www.linkedin.com/in/minhaj-t/"
                 className="flex items-center px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700"
               >
                 <Linkedin size={20} className="mr-2" />
                 LinkedIn
               </a>
               <a
-                href="#"
+                href="minhajt.uae@gmail.com"
                 className="flex items-center px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700"
               >
                 <Mail size={20} className="mr-2" />
@@ -294,7 +294,11 @@ export default function Home() {
 
                 <div className="mt-8 flex flex-col sm:flex-row sm:space-x-4 items-center sm:items-start">
                   <button
-                    onClick={() => handleNavigation("projects")}
+                    onClick={() =>
+                      handleNavigation(
+                        "https://drive.google.com/file/d/1Do36pnnaw6j3F13mfqrdAiQvIlNhg4of/view?usp=drive_link"
+                      )
+                    }
                     className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 w-48 sm:w-auto"
                   >
                     Download CV
