@@ -58,18 +58,18 @@ const ResumePage = () => {
 
   const testimonialsData = [
     {
-      name: "John Doe",
-      role: "CTO at TechCorp",
+      name: "Simili Ismail",
+      role: "HR at Arkanet",
       testimonial:
         "Minhaj's work is incredible. He has a great eye for detail.",
-      imgSrc: "https://i.pravatar.cc/150?img=12",
+      imgSrc: "https://i.postimg.cc/0Nc1z6hr/Simili-Ismail.jpg",
     },
     {
-      name: "Jane Smith",
-      role: "CEO at NewTech Solutions",
+      name: "Rasi K P",
+      role: "Full Stack Developer",
       testimonial:
         "Working with Minhaj has been an excellent experience, delivering high-quality work on time.",
-      imgSrc: "https://i.pravatar.cc/150?img=61",
+      imgSrc: "https://i.postimg.cc/brvB43vR/Rasi-K-P.jpg",
     },
   ];
 
