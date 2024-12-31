@@ -27,6 +27,7 @@ export default function Home() {
     "const portfolio = {",
     "  name: 'minhaj.pro''V1.15',",
     "  status: 'initializing...'",
+    "HAPPY NEW YEAR 2025",
     "};",
     "",
     "// Loading complete...",
