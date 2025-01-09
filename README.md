@@ -3,7 +3,7 @@
 Welcome to the **MiNHAJ** Personal Portfolio Website Template—a sleek and modern template designed for developers, designers, and creatives to showcase their skills and work. Built with **Next.js**, it ensures fast performance, responsive design, and SEO optimization.
 
 ![PORTFOLIO](https://github.com/user-attachments/assets/aacb8b85-1e6c-4fde-a64c-5af4ee8f431f)
-
+ 
 
 ### Features:
 - **Responsive Design**: Optimized for mobile and desktop.
