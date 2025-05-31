@@ -64,7 +64,7 @@ export const IframeModal: React.FC<IframeModalProps> = ({
                 website in another browser:
               </p>
               <a
-                href="https://www.arsturn.com/minhaj"
+                href="https://mi-bot-oypf.onrender.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
@@ -80,7 +80,7 @@ export const IframeModal: React.FC<IframeModalProps> = ({
                 </div>
               )}
               <iframe
-                src="https://resilient-macaron-fb6823.netlify.app/"
+                src="https://mi-bot-oypf.onrender.com/"
                 className="absolute inset-0 w-full h-full"
                 title="AI Assistant"
                 onLoad={() => {
