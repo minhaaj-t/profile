@@ -62,7 +62,7 @@ export const IframeModal: React.FC<IframeModalProps> = ({
               <p className="mt-2 text-gray-600 dark:text-gray-300">
                 If you can&apos;t open the screen, please try opening this
                 website in another browser:
-              </p>
+              </p> 
               <a
                 href="https://mi-bot-oypf.onrender.com/"
                 target="_blank"
