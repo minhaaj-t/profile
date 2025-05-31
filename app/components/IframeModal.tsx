@@ -80,7 +80,7 @@ export const IframeModal: React.FC<IframeModalProps> = ({
                 </div>
               )}
               <iframe
-                src="https://www.arsturn.com/minhaj"
+                src="https://resilient-macaron-fb6823.netlify.app/"
                 className="absolute inset-0 w-full h-full"
                 title="AI Assistant"
                 onLoad={() => {
