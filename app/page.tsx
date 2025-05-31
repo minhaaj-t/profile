@@ -137,7 +137,7 @@ export default function Home() {
                 <Linkedin size={20} />
               </a>
               <a
-                href="minhajt.uae@gmail.com"
+                href="mailto:minhajt.uae@gmail.com"
                 className="ml-4 text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
                 aria-label="Email contact"
               >
