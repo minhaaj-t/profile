@@ -8,7 +8,7 @@ import { ContactForm } from "./components/ContactForm";
 import { CircularNavbar } from "./components/CircularNavbar";
 import { SocialMediaGrid } from "./components/SocialMediaGrid";
 import { projects, socialPosts } from "./lib/data";
-import { IframeModal } from "./components/IframeModal";
+// import { IframeModal } from "./components/IframeModal";
 import BackgroundAnimation from "./components/BackgroundAnimation";
 import AIBotButton from "./components/AIBotButton";
 import GradientTitle from "./components/GradientTitle";
@@ -388,10 +388,10 @@ export default function Home() {
 
       {!isLoading && <AIBotButton onClick={() => setIsAIModalOpen(true)} />}
 
-      <IframeModal
+{/*       <IframeModal
         isOpen={isAIModalOpen}
         onClose={() => setIsAIModalOpen(false)}
-      />
+      /> */}
     </div>
   );
 }
