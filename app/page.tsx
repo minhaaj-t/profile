@@ -385,13 +385,14 @@ export default function Home() {
         activeSection={activeSection}
         setActiveSection={setActiveSection}
       />
-
+ 
       {!isLoading && <AIBotButton onClick={() => setIsAIModalOpen(true)} />}
 
 {/*       <IframeModal
         isOpen={isAIModalOpen}
         onClose={() => setIsAIModalOpen(false)}
       /> */}
+      
     </div>
   );
 }
