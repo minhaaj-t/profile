@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 
-// TypeScript: Extend window to accept ChatWidgetConfig
 declare global {
   interface Window {
     ChatWidgetConfig?: unknown;
@@ -9,91 +8,48 @@ declare global {
 
 const ChatWidget: React.FC = () => {
   useEffect(() => {
-    // Delay loading for 20 seconds
     const timeout = setTimeout(() => {
-      // Inject glassmorphism style
+      // Inject isolated styles
       const style = document.createElement("style");
       style.textContent = `
-        .chat-widget-container {
-          max-width: 400px;
-          width: 100%;
-          height: 75vh;
-          font-family: 'Segoe UI', sans-serif;
-          background: rgba(18, 18, 18, 0.6);
-          border-radius: 20px;
-          box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
-          backdrop-filter: blur(20px);
-          -webkit-backdrop-filter: blur(20px);
-          border: 1px solid rgba(255, 255, 255, 0.15);
-          overflow: hidden;
-          color: #f0f0f0;
+        /* FLOATING BUTTON - DOES NOT AFFECT LAYOUT */
+        .chat-launcher {
+          position: fixed !important;
+          bottom: 88px !important;
+          right: 24px !important;
+          width: 45px !important;
+          height: 45px !important;
+          border-radius: 50% !important;
+          background-image: url('https://assets-v2.lottiefiles.com/a/5b038ad2-4fd1-11ef-8f43-075ce7e78c34/qhhkJZzS4E.gif') !important;
+          background-size: cover !important;
+          background-position: center !important;
+          background-repeat: no-repeat !important;
+          background-color: transparent !important;
+          border: none !important;
+          cursor: pointer !important;
+          z-index: 99999 !important;
+          padding: 0 !important;
+          display: block !important;
+          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3) !important;
         }
 
-        @media (max-width: 480px) {
-          .chat-widget-container {
-            max-width: 100%;
-            height: 85vh;
-            border-radius: 0;
-          }
+        /* Hide SVG and text inside the launcher */
+        .chat-launcher svg,
+        .chat-launcher-text {
+          display: none !important;
         }
 
-        .chat-body,
-        .chat-messages,
-        .chat-controls {
-          background: transparent !important;
-          color: #f0f0f0;
+        /* Ensure chat modal and container are overlay-only */
+        .chat-container,
+        .chat-widget,
+        .chat-modal {
+          position: fixed !important;
+          max-width: 100vw !important;
+          max-height: 100vh !important;
+          z-index: 99998 !important;
         }
 
-        .chat-bubble {
-          background: rgba(255, 255, 255, 0.08) !important;
-          color: #ffffff !important;
-          border: 1px solid rgba(255, 255, 255, 0.25);
-          border-radius: 16px;
-          padding: 12px 16px;
-          margin-bottom: 10px;
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
-          box-shadow: 0 6px 16px rgba(0,0,0,0.3);
-        }
-
-        .chat-textarea {
-          background: rgba(255, 255, 255, 0.06);
-          color: #ffffff !important;
-          border: 1px solid rgba(255, 255, 255, 0.25);
-          padding: 12px;
-          border-radius: 14px;
-          width: 100%;
-          resize: none;
-          backdrop-filter: blur(10px);
-          -webkit-backdrop-filter: blur(10px);
-          font-size: 14px;
-        }
-
-        .chat-textarea::placeholder {
-          color: #cccccc !important;
-        }
-
-        .chat-submit {
-          background: linear-gradient(135deg, #7b61ff, #3ec9ff);
-          border: none;
-          border-radius: 14px;
-          padding: 10px 12px;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: background 0.3s ease;
-          box-shadow: 0 6px 14px rgba(62, 201, 255, 0.4);
-        }
-
-        .chat-submit:hover {
-          background: linear-gradient(135deg, #917bff, #56d6ff);
-        }
-
-        .chat-submit svg {
-          stroke: #ffffff !important;
-        }
-
+        /* Hide branding/footer */
         .chat-footer,
         .chat-footer-link {
           display: none !important;
@@ -105,14 +61,13 @@ const ChatWidget: React.FC = () => {
       `;
       document.head.appendChild(style);
 
-      // Observe and remove injected footer later
-      const hideFooter = () => {
+      // Clean up footer if injected later
+      const observer = new MutationObserver(() => {
         document.querySelectorAll(".chat-footer, .chat-footer-link").forEach(el => el.remove());
-      };
-      const observer = new MutationObserver(hideFooter);
+      });
       observer.observe(document.body, { childList: true, subtree: true });
 
-      // Set the global config
+      // Chat widget config
       window.ChatWidgetConfig = {
         webhook: {
           url: "https://n8n-new-vyxl.onrender.com/webhook/698c752f-0f32-4641-9765-01a0f7d93061/chat",
@@ -136,24 +91,23 @@ const ChatWidget: React.FC = () => {
         }
       };
 
-      // Load external chat widget script
+      // Inject script
       const script = document.createElement("script");
       script.src = "https://cdn.jsdelivr.net/gh/funtastic418/chat-widget@main/chat-widget.js";
       script.async = true;
       document.body.appendChild(script);
 
-      // Clean up
       return () => {
         observer.disconnect();
         document.head.removeChild(style);
         document.body.removeChild(script);
       };
-    }, 10000); // 20s delay
+    }, 10000);
 
     return () => clearTimeout(timeout);
   }, []);
 
-  return null; // No visual component needed
+  return null;
 };
 
 export default ChatWidget;
