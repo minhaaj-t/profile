@@ -14,7 +14,7 @@
     "clsx": "^2.1.1",
     "fireworks-js": "^2.10.8",
     "lucide-react": "^0.469.0",
-    "next": "14.2.16",
+    "next": "^15.3.3",
     "react": "^18",
     "react-dom": "^18",
     "react-fontawesome": "^1.7.1",

@@ -8,11 +8,12 @@ import { ContactForm } from "./components/ContactForm";
 import { CircularNavbar } from "./components/CircularNavbar";
 import { SocialMediaGrid } from "./components/SocialMediaGrid";
 import { projects, socialPosts } from "./lib/data";
-import { IframeModal } from "./components/IframeModal";
+// import { IframeModal } from "./components/IframeModal";
 import BackgroundAnimation from "./components/BackgroundAnimation";
-import AIBotButton from "./components/AIBotButton";
+// import AIBotButton from "./components/AIBotButton";
 import GradientTitle from "./components/GradientTitle";
 import ResumePage from "./components/ResumePage";
+import ChatWidget from "./components/ChatWidget";
 
 export default function Home() {
   const [isDarkMode, setIsDarkMode] = useState(true);
@@ -20,57 +21,32 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [loadingText, setLoadingText] = useState("");
   const [pageTransition, setPageTransition] = useState(false);
-  const [isAIModalOpen, setIsAIModalOpen] = useState(false);
+  // const [isAIModalOpen, setIsAIModalOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const codeLines = [
-    "const portfolio = {",
-    "  name: 'minhaj.pro',",
-    "  status: 'initializing...'",
-    "};",
-    "",
-    "// Loading complete...",
-  ];
-
-  const typeCode = useCallback(() => {
-    let currentLine = 0;
-    let currentChar = 0;
-    let isTyping = true;
-
-    const typeNextChar = () => {
-      if (!isTyping) return;
-
-      if (currentLine < codeLines.length) {
-        if (currentChar < codeLines[currentLine].length) {
-          setLoadingText((prev) => prev + codeLines[currentLine][currentChar]);
-          currentChar++;
-        } else {
-          setLoadingText((prev) => prev + "\n");
-          currentLine++;
-          currentChar = 0;
-        }
-
-        const delay = codeLines[currentLine]?.[currentChar] === " " ? 50 : 100;
-        setTimeout(typeNextChar, delay);
-      } else {
-        setTimeout(() => {
-          setIsLoading(false);
-          isTyping = false;
-        }, 500);
-      }
-    };
-
-    typeNextChar();
-
-    return () => {
-      isTyping = false;
-    };
-  }, []);
-
   useEffect(() => {
-    const cleanup = typeCode();
-    return cleanup;
-  }, [typeCode]);
+    const loadingMessages = [
+      "Loading your personalized experience...",
+      "Fetching the latest updates...",
+      "Preparing MiNHAJ's portfolio...",
+      "Almost there, hang tight!",
+      "Bringing the best of my work to you...",
+    ];
+
+    let index = 0;
+    const interval = setInterval(() => {
+      setLoadingText(loadingMessages[index]);
+      index = (index + 1) % loadingMessages.length;
+    }, 3000);
+
+    // Simulate loading completion after 15 seconds
+    setTimeout(() => {
+      clearInterval(interval);
+      setIsLoading(false);
+    }, 15000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
@@ -386,13 +362,13 @@ export default function Home() {
         setActiveSection={setActiveSection}
       />
  
-      {!isLoading && <AIBotButton onClick={() => setIsAIModalOpen(true)} />}
+      {/* {!isLoading && <AIBotButton onClick={() => setIsAIModalOpen(true)} />} */}
 
-      <IframeModal
+      {/* <IframeModal
         isOpen={isAIModalOpen}
         onClose={() => setIsAIModalOpen(false)}
-      />
-      
+      /> */}
+      <ChatWidget />
     </div>
   );
 }
