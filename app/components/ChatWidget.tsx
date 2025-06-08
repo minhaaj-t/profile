@@ -9,10 +9,8 @@ declare global {
 const ChatWidget: React.FC = () => {
   useEffect(() => {
     const timeout = setTimeout(() => {
-      // Inject custom styles
       const style = document.createElement("style");
       style.textContent = `
-        /* === Chat Styling === */
         .chat-body,
         .chat-messages,
         .chat-controls {
@@ -34,10 +32,10 @@ const ChatWidget: React.FC = () => {
 
         .chat-launcher {
           position: fixed !important;
-          bottom: 24px !important; /* Updated position */
+          bottom: 16px !important;
           right: 24px !important;
-          width: 45px !important;
-          height: 45px !important;
+          width: 52px !important;
+          height: 52px !important;
           border-radius: 50% !important;
           background-image: url('https://assets-v2.lottiefiles.com/a/5b038ad2-4fd1-11ef-8f43-075ce7e78c34/qhhkJZzS4E.gif') !important;
           background-size: cover !important;
@@ -61,8 +59,9 @@ const ChatWidget: React.FC = () => {
         .chat-widget,
         .chat-modal {
           position: fixed !important;
+          bottom: 80px !important;
           max-width: 100vw !important;
-          max-height: 100vh !important;
+          max-height: 90vh !important;
           z-index: 99998 !important;
         }
 
@@ -85,11 +84,21 @@ const ChatWidget: React.FC = () => {
           backdrop-filter: blur(6px);
         }
 
-        /* === Responsive position for mobile === */
+        /* Mobile-specific tweaks */
         @media (max-width: 768px) {
           .chat-launcher {
-            bottom: 70px !important;
+            bottom: 20px !important;
             right: 16px !important;
+            width: 48px !important;
+            height: 48px !important;
+          }
+
+          .chat-modal {
+            bottom: 76px !important;
+            left: 4px !important;
+            right: 4px !important;
+            width: auto !important;
+            max-height: 85vh !important;
           }
         }
       `;
@@ -100,7 +109,6 @@ const ChatWidget: React.FC = () => {
       });
       observer.observe(document.body, { childList: true, subtree: true });
 
-      // Chat widget config
       window.ChatWidgetConfig = {
         webhook: {
           url: "https://n8n-new-vyxl.onrender.com/webhook/698c752f-0f32-4641-9765-01a0f7d93061/chat",
@@ -124,19 +132,17 @@ const ChatWidget: React.FC = () => {
         }
       };
 
-      // Inject widget script
       const script = document.createElement("script");
       script.src = "https://cdn.jsdelivr.net/gh/funtastic418/chat-widget@main/chat-widget.js";
       script.async = true;
       document.body.appendChild(script);
 
-      // Cleanup
       return () => {
         observer.disconnect();
         document.head.removeChild(style);
         document.body.removeChild(script);
       };
-    }, 10000); // 10s delay
+    }, 10000);
 
     return () => clearTimeout(timeout);
   }, []);
