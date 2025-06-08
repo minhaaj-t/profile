@@ -9,10 +9,29 @@ declare global {
 const ChatWidget: React.FC = () => {
   useEffect(() => {
     const timeout = setTimeout(() => {
-      // Inject isolated styles
+      // Inject custom styles
       const style = document.createElement("style");
       style.textContent = `
-        /* FLOATING BUTTON - DOES NOT AFFECT LAYOUT */
+        /* === Chat Styling === */
+        .chat-body,
+        .chat-messages,
+        .chat-controls {
+          background: transparent !important;
+          color: #ffffff;
+        }
+
+        .chat-bubble {
+          background: rgba(255, 255, 255, 0.1) !important;
+          color: #ffffff !important;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          border-radius: 16px;
+          padding: 10px 14px;
+          margin-bottom: 8px;
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+          box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
         .chat-launcher {
           position: fixed !important;
           bottom: 88px !important;
@@ -33,13 +52,11 @@ const ChatWidget: React.FC = () => {
           box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3) !important;
         }
 
-        /* Hide SVG and text inside the launcher */
         .chat-launcher svg,
         .chat-launcher-text {
           display: none !important;
         }
 
-        /* Ensure chat modal and container are overlay-only */
         .chat-container,
         .chat-widget,
         .chat-modal {
@@ -49,8 +66,7 @@ const ChatWidget: React.FC = () => {
           z-index: 99998 !important;
         }
 
-        /* Hide branding/footer */
-        .chat-footer,
+        /* Only hide footer link, not entire footer */
         .chat-footer-link {
           display: none !important;
           visibility: hidden !important;
@@ -58,36 +74,48 @@ const ChatWidget: React.FC = () => {
           padding: 0 !important;
           margin: 0 !important;
         }
+
+        /* Style chat textarea if needed */
+        .chat-textarea {
+          background: rgba(255, 255, 255, 0.08);
+          color: #ffffff !important;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          padding: 10px;
+          border-radius: 12px;
+          width: 100%;
+          resize: none;
+          backdrop-filter: blur(6px);
+        }
       `;
       document.head.appendChild(style);
 
-      // Clean up footer if injected later
+      // Only remove branding link
       const observer = new MutationObserver(() => {
-        document.querySelectorAll(".chat-footer, .chat-footer-link").forEach(el => el.remove());
+        document.querySelectorAll(".chat-footer-link").forEach(el => el.remove());
       });
       observer.observe(document.body, { childList: true, subtree: true });
 
-      // Chat widget config
+      // Widget config
       window.ChatWidgetConfig = {
         webhook: {
           url: "https://n8n-new-vyxl.onrender.com/webhook/698c752f-0f32-4641-9765-01a0f7d93061/chat",
-          route: "general"
+          route: "general",
         },
         branding: {
           logo: "https://assets-v2.lottiefiles.com/a/5b038ad2-4fd1-11ef-8f43-075ce7e78c34/qhhkJZzS4E.gif",
           name: "MiNHAJ AI",
           welcomeText: "Hallo! AI Assistent is here",
-          responseTimeText: "Muhammed Minhaj Mahroof"
+          responseTimeText: "Muhammed Minhaj Mahroof",
         },
         style: {
           primaryColor: "#7b61ff",
           secondaryColor: "#3ec9ff",
           position: "right",
           backgroundColor: "#121212",
-          fontColor: "#f0f0f0"
+          fontColor: "#f0f0f0",
         },
         behaviour: {
-          requireContactDetails: false
+          requireContactDetails: false,
         }
       };
 
@@ -97,6 +125,7 @@ const ChatWidget: React.FC = () => {
       script.async = true;
       document.body.appendChild(script);
 
+      // Cleanup on unmount
       return () => {
         observer.disconnect();
         document.head.removeChild(style);
