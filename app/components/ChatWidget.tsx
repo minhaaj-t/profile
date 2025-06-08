@@ -34,7 +34,7 @@ const ChatWidget: React.FC = () => {
 
         .chat-launcher {
           position: fixed !important;
-          bottom: 88px !important;
+          bottom: 24px !important; /* Updated position */
           right: 24px !important;
           width: 45px !important;
           height: 45px !important;
@@ -66,7 +66,6 @@ const ChatWidget: React.FC = () => {
           z-index: 99998 !important;
         }
 
-        /* Only hide footer link, not entire footer */
         .chat-footer-link {
           display: none !important;
           visibility: hidden !important;
@@ -75,7 +74,6 @@ const ChatWidget: React.FC = () => {
           margin: 0 !important;
         }
 
-        /* Style chat textarea if needed */
         .chat-textarea {
           background: rgba(255, 255, 255, 0.08);
           color: #ffffff !important;
@@ -86,16 +84,23 @@ const ChatWidget: React.FC = () => {
           resize: none;
           backdrop-filter: blur(6px);
         }
+
+        /* === Responsive position for mobile === */
+        @media (max-width: 768px) {
+          .chat-launcher {
+            bottom: 70px !important;
+            right: 16px !important;
+          }
+        }
       `;
       document.head.appendChild(style);
 
-      // Only remove branding link
       const observer = new MutationObserver(() => {
         document.querySelectorAll(".chat-footer-link").forEach(el => el.remove());
       });
       observer.observe(document.body, { childList: true, subtree: true });
 
-      // Widget config
+      // Chat widget config
       window.ChatWidgetConfig = {
         webhook: {
           url: "https://n8n-new-vyxl.onrender.com/webhook/698c752f-0f32-4641-9765-01a0f7d93061/chat",
@@ -119,19 +124,19 @@ const ChatWidget: React.FC = () => {
         }
       };
 
-      // Inject script
+      // Inject widget script
       const script = document.createElement("script");
       script.src = "https://cdn.jsdelivr.net/gh/funtastic418/chat-widget@main/chat-widget.js";
       script.async = true;
       document.body.appendChild(script);
 
-      // Cleanup on unmount
+      // Cleanup
       return () => {
         observer.disconnect();
         document.head.removeChild(style);
         document.body.removeChild(script);
       };
-    }, 10000);
+    }, 10000); // 10s delay
 
     return () => clearTimeout(timeout);
   }, []);
