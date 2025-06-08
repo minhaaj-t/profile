@@ -37,7 +37,7 @@ const ChatWidget: React.FC = () => {
           width: 52px !important;
           height: 52px !important;
           border-radius: 50% !important;
-          background-image: url('https://media3.giphy.com/avatars/jasperai/zladbSgn7Oxi.gif') !important;
+          background-image: url('https://assets-v2.lottiefiles.com/a/5b038ad2-4fd1-11ef-8f43-075ce7e78c34/qhhkJZzS4E.gif') !important;
           background-size: cover !important;
           background-position: center !important;
           background-repeat: no-repeat !important;
@@ -115,7 +115,7 @@ const ChatWidget: React.FC = () => {
           route: "general",
         },
         branding: {
-          logo: "https://assets-v2.lottiefiles.com/a/763bebc2-cc0f-11ef-a1e0-db3c7723dda0/3dM80dk50G.gif",
+          logo: "https://assets-v2.lottiefiles.com/a/5b038ad2-4fd1-11ef-8f43-075ce7e78c34/qhhkJZzS4E.gif",
           name: "MiNHAJ AI",
           welcomeText: "Hallo! AI Assistent is here",
           responseTimeText: "Muhammed Minhaj Mahroof",
