@@ -238,7 +238,7 @@ export default function Home() {
             activeSection === "home" ? "block" : "hidden"
           }`}
         >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="home max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div className="lg:flex lg:items-center lg:justify-between">
               <div className="flex-1 min-w-0 text-center lg:text-left">
                 <div className="mb-8 relative w-64 h-64 mx-auto lg:w-96 lg:h-96">
@@ -249,7 +249,7 @@ export default function Home() {
                         : "https://i.postimg.cc/4xs3DMyN/Snapinsta-app-348708136-165323943175436-763747922542576098-n-1080.jpg"
                     }
                     alt="MiNHAJ Profile Picture"
-                    className="rounded-full object-cover w-full h-full transition-opacity duration-300"
+                    className="home rounded-full object-cover w-full h-full transition-opacity duration-300"
                   />
                 </div>
                 <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
@@ -313,7 +313,7 @@ export default function Home() {
             activeSection === "projects" ? "block" : "hidden"
           }`}
         >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="projects max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <GradientTitle>Projects</GradientTitle>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {projects.map((project, index) => (
@@ -329,14 +329,14 @@ export default function Home() {
 
         <section
           id="skills"
-          className={`py-16 ${activeSection === "skills" ? "block" : "hidden"}`}
+          className={`skills py-16 ${activeSection === "skills" ? "block" : "hidden"}`}
         >
           <ResumePage />
         </section>
 
         <section
           id="contact"
-          className={`py-16 ${
+          className={`contact py-16 ${
             activeSection === "contact" ? "block" : "hidden"
           }`}
         >
@@ -350,7 +350,7 @@ export default function Home() {
           id="social"
           className={`py-16 ${activeSection === "social" ? "block" : "hidden"}`}
         >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="social max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <GradientTitle>Social Media</GradientTitle>
             <SocialMediaGrid posts={socialPosts} />
           </div>

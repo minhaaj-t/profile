@@ -19,6 +19,7 @@ const ResumePage = () => {
     document.body.className = isDarkMode
       ? "bg-gray-900 text-white"
       : "bg-white text-black";
+      
     localStorage.setItem("darkMode", isDarkMode.toString());
   }, [isDarkMode]);
 

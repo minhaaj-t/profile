@@ -1,147 +1,102 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { X } from "lucide-react";
 
-declare global {
-  interface Window {
-    ChatWidgetConfig?: {
-      webhook: {
-        url: string;
-        route: string;
-      };
-      branding: {
-        logo: string;
-        name: string;
-        welcomeText: string;
-      };
-    };
-  }
+interface IframeModalProps {
+  isOpen: boolean;
+  onClose: () => void;
 }
 
-const ChatWidget: React.FC = () => {
+export const IframeModal: React.FC<IframeModalProps> = ({
+  isOpen,
+  onClose,
+}) => {
+  const [hasError, setHasError] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [retryCount, setRetryCount] = useState(0);
+
+  const maxRetries = 3; // Maximum number of retries
+
   useEffect(() => {
-    // Inject glassmorphism styles
-    const style = document.createElement("style");
-    style.textContent = `
-      .chat-widget-container {
-        max-width: 400px;
-        width: 100%;
-        height: 75vh;
-        font-family: 'Segoe UI', sans-serif;
-        background: rgba(18, 18, 18, 0.6);
-        border-radius: 20px;
-        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        overflow: hidden;
-        color: #f0f0f0;
-      }
+    let timer: NodeJS.Timeout;
 
-      @media (max-width: 480px) {
-        .chat-widget-container {
-          max-width: 100%;
-          height: 85vh;
-          border-radius: 0;
+    if (isOpen) {
+      // Set a timeout to detect if the iframe fails to load
+      timer = setTimeout(() => {
+        if (isLoading && retryCount < maxRetries) {
+          setRetryCount(retryCount + 1);
+          setIsLoading(true); // Trigger reloading
+        } else if (retryCount >= maxRetries) {
+          setHasError(true); // Show error after max retries
         }
-      }
+      }, 5000); // Adjust timeout as needed
+    }
 
-      .chat-body,
-      .chat-messages,
-      .chat-controls {
-        background: transparent !important;
-        color: #f0f0f0;
-      }
+    return () => clearTimeout(timer);
+  }, [isOpen, isLoading, retryCount]);
 
-      .chat-bubble {
-        background: rgba(255, 255, 255, 0.08) !important;
-        color: #ffffff !important;
-        border: 1px solid rgba(255, 255, 255, 0.25);
-        border-radius: 16px;
-        padding: 12px 16px;
-        margin-bottom: 10px;
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        box-shadow: 0 6px 16px rgba(0,0,0,0.3);
-      }
+  if (!isOpen) return null;
 
-      .chat-textarea {
-        background: rgba(255, 255, 255, 0.06);
-        color: #ffffff !important;
-        border: 1px solid rgba(255, 255, 255, 0.25);
-        padding: 12px;
-        border-radius: 14px;
-        width: 100%;
-        resize: none;
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        font-size: 14px;
-      }
-
-      .chat-textarea::placeholder {
-        color: #cccccc !important;
-      }
-
-      .chat-submit {
-        background: linear-gradient(135deg, #7b61ff, #3ec9ff);
-        border: none;
-        border-radius: 14px;
-        padding: 10px 12px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: background 0.3s ease;
-        box-shadow: 0 6px 14px rgba(62, 201, 255, 0.4);
-      }
-
-      .chat-submit:hover {
-        background: linear-gradient(135deg, #917bff, #56d6ff);
-      }
-
-      .chat-submit svg {
-        stroke: #ffffff !important;
-      }
-
-      .chat-footer,
-      .chat-footer-link {
-        display: none !important;
-        visibility: hidden !important;
-        height: 0 !important;
-        padding: 0 !important;
-        margin: 0 !important;
-      }
-    `;
-    document.head.appendChild(style);
-
-    // Set up the chat widget config
-    window.ChatWidgetConfig = {
-      webhook: {
-        url: "https://n8n-new-vyxl.onrender.com/webhook/698c752f-0f32-4641-9765-01a0f7d93061/chat",
-        route: "general",
-      },
-      branding: {
-        logo: "https://assets-v2.lottiefiles.com/a/5b038ad2-4fd1-11ef-8f43-075ce7e78c34/qhhkJZzS4E.gif",
-        name: "MiNHAJ AI",
-        welcomeText: "Hallo! How can I assist you today? 😊",
-      },
-    };
-
-    // Dynamically remove chat footer
-    const hideFooter = () => {
-      document
-        .querySelectorAll(".chat-footer, .chat-footer-link")
-        .forEach((el) => el.remove());
-    };
-
-    const observer = new MutationObserver(hideFooter);
-    observer.observe(document.body, { childList: true, subtree: true });
-
-    return () => {
-      observer.disconnect();
-      document.head.removeChild(style);
-    };
-  }, []);
-
-  return null; // This component doesn't render UI directly
+  return (
+    <div className="fixed inset-0 z-50 overflow-hidden">
+      <div
+        className="absolute inset-0 bg-black bg-opacity-50"
+        onClick={onClose}
+      />
+      <div className="absolute inset-4 sm:inset-8 bg-white dark:bg-gray-800 rounded-lg shadow-xl flex flex-col">
+        <div className="flex items-center justify-between p-4 border-b dark:border-gray-700">
+          <h2 className="text-lg font-semibold">Mi Chatbot</h2>
+          <button
+            onClick={onClose}
+            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors"
+            aria-label="Close"
+          >
+            <X size={20} />
+          </button>
+        </div>
+        <div className="flex-1 relative">
+          {hasError ? (
+            <div className="flex flex-col items-center justify-center h-full text-center p-4">
+              <p className="text-lg font-semibold text-red-600">
+                The webpage could not be loaded.
+              </p>
+              <p className="mt-2 text-gray-600 dark:text-gray-300">
+                If you can&apos;t open the screen, please try opening this
+                website in another browser:
+              </p> 
+              <a
+                href="https://mi-bot-oypf.onrender.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+              >
+                Open in Browser
+              </a>
+            </div>
+          ) : (
+            <>
+              {isLoading && (
+                <div className="absolute inset-0 flex items-center justify-center bg-white dark:bg-gray-800 z-10">
+                  <p className="text-gray-500">Loading...</p>
+                </div>
+              )}
+              <iframe
+                src="https://mi-bot-oypf.onrender.com/"
+                className="absolute inset-0 w-full h-full"
+                title="AI Assistant"
+                onLoad={() => {
+                  setIsLoading(false);
+                  setHasError(false);
+                }}
+                onError={() => {
+                  setIsLoading(false);
+                  setHasError(true);
+                }}
+                sandbox="allow-scripts allow-same-origin"
+              />
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 };
-
-export default ChatWidget;

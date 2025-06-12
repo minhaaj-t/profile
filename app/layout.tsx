@@ -82,14 +82,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://cdn.jsdelivr.net" />
 
         {/* Font Preload */}
-        <link
-          rel="preload"
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
-          as="style"
-        />
-
-        {/* Critical CSS */}
-        <link rel="stylesheet" href="/globals.css" />
+        {/* Font preloading and global CSS are handled by Next.js font loader and CSS imports */}
       </head>
       <body className={inter.className}>{children}</body>
     </html>
