@@ -7,7 +7,7 @@ import PortfolioHome from "./components/PortfolioHome";
 import { ContactForm } from "./components/ContactForm";
 import { CircularNavbar } from "./components/CircularNavbar";
 import { SocialMediaGrid } from "./components/SocialMediaGrid";
-import { projects, socialPosts } from "./lib/data";
+import { projects } from "./lib/data";
 // import { IframeModal } from "./components/IframeModal";
 import BackgroundAnimation from "./components/BackgroundAnimation";
 // import AIBotButton from "./components/AIBotButton";
@@ -352,7 +352,7 @@ export default function Home() {
         >
           <div className="social max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <GradientTitle>Social Media</GradientTitle>
-            <SocialMediaGrid posts={socialPosts} />
+            <SocialMediaGrid/>
           </div>
         </section>
       </main>

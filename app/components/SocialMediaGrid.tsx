@@ -1,5 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
-import Image from "next/image";
+import React, { useEffect, useState } from "react";
 
 interface SocialPost {
   id: string;
@@ -16,58 +15,49 @@ export const SocialMediaGrid: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [filters, setFilters] = useState({ country: "in", language: "en" });
 
-  const fetchPage = useCallback(
-    async (token?: string) => {
-      setLoading(true);
-      setError(null);
-      const param = token ? `&page=${token}` : "";
-      const { country, language } = filters;
-      const url = `https://newsdata.io/api/1/latest?apikey=pub_0dc6f564a2ef41728dfd8ba00a2d5838&q=tech&country=${country}&language=${language}&category=technology${param}`;
+  const fetchPage = async (token?: string) => {
+    setLoading(true);
+    setError(null);
+    const param = token ? `&page=${token}` : "";
+    const { country, language } = filters;
+    const url = `https://newsdata.io/api/1/latest?apikey=pub_0dc6f564a2ef41728dfd8ba00a2d5838&q=tech&country=${country}&language=${language}&category=technology${param}`;
 
-      try {
-        const res = await fetch(url);
-        const json = await res.json();
-        if (json.results) {
-          const mappedPosts: SocialPost[] = json.results.map(
-            (
-              item: {
-                guid?: string;
-                link?: string;
-                image_url?: string;
-                title?: string;
-              },
-              i: number
-            ) => ({
-              id: item.guid || item.link || `${token ?? "first"}-${i}`,
-              image: item.image_url || "https://via.placeholder.com/400",
-              caption: item.title || "",
-              link: item.link || "#",
-            })
-          );
-          setPosts(mappedPosts);
-          setNextPage(json.nextPage || null);
-          if (token) setPrevTokens((prev) => [...prev, token]);
-          else setPrevTokens([]);
-        }
-      } catch (e) {
-        console.error(e);
-        setError("Failed to fetch news.");
-      } finally {
-        setLoading(false);
+    try {
+      const res = await fetch(url);
+      const json = await res.json();
+      if (json.results) {
+        setPosts(
+          json.results.map((item: any, i: number) => ({
+            id: item.guid || item.link || `${token}-${i}`,
+            image: item.image_url || "https://via.placeholder.com/400",
+            caption: item.title || "",
+            link: item.link || "#",
+          }))
+        );
+        if (token) setPrevTokens([...prevTokens, token]);
+        else setPrevTokens([]);
+        setNextPage(json.nextPage || null);
+      } else {
+        setPosts([]);
+        setNextPage(null);
+        setError("No results found.");
       }
-    },
-    [filters]
-  );
+    } catch (e: any) {
+      console.error(e);
+      setError("Failed to fetch news.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     fetchPage();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters]);
 
   const currentPage = prevTokens.length + 1;
 
   return (
-    <div className="p-4">
+    <div className="social p-4">
       {/* Filters on right side */}
       <div className="flex justify-end gap-4 mb-4">
         <select
@@ -103,25 +93,20 @@ export const SocialMediaGrid: React.FC = () => {
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {posts.map((p) => (
-          <a
+          <div
             key={p.id}
-            href={p.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="relative block aspect-square overflow-hidden rounded shadow group"
+            className="relative overflow-hidden rounded-lg aspect-square cursor-pointer"
+            onClick={() => window.open(p.link, "_blank")}
           >
-            <Image
+            <img
               src={p.image}
               alt={p.caption}
-              fill
-              className="object-cover w-full h-full group-hover:scale-110 transition"
-              sizes="(max-width: 768px) 100vw, 25vw"
-              style={{ objectFit: "cover" }}
+              className="object-cover w-full h-full hover:scale-110 transition"
             />
-            <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition flex items-end p-4">
+            <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition flex items-end p-4">
               <p className="text-white text-sm">{p.caption}</p>
             </div>
-          </a>
+          </div>
         ))}
       </div>
 
