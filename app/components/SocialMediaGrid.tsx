@@ -1,10 +1,22 @@
 import React, { useEffect, useState } from "react";
 
+interface NewsDataItem {
+  guid?: string;
+  image_url?: string;
+  title?: string;
+  link?: string;
+}
+
 interface SocialPost {
   id: string;
   image: string;
   caption: string;
   link: string;
+}
+
+interface NewsDataResponse {
+  results?: NewsDataItem[];
+  nextPage?: string;
 }
 
 export const SocialMediaGrid: React.FC = () => {
@@ -24,17 +36,17 @@ export const SocialMediaGrid: React.FC = () => {
 
     try {
       const res = await fetch(url);
-      const json = await res.json();
-      if (json.results) {
+      const json = (await res.json()) as NewsDataResponse;
+      if (json.results && json.results.length > 0) {
         setPosts(
-          json.results.map((item: any, i: number) => ({
-            id: item.guid || item.link || `${token}-${i}`,
+          json.results.map((item, i) => ({
+            id: item.guid || item.link || `${token || "first"}-${i}`,
             image: item.image_url || "https://via.placeholder.com/400",
             caption: item.title || "",
             link: item.link || "#",
           }))
         );
-        if (token) setPrevTokens([...prevTokens, token]);
+        if (token) setPrevTokens((prev) => [...prev, token]);
         else setPrevTokens([]);
         setNextPage(json.nextPage || null);
       } else {
@@ -42,7 +54,7 @@ export const SocialMediaGrid: React.FC = () => {
         setNextPage(null);
         setError("No results found.");
       }
-    } catch (e: any) {
+    } catch (e) {
       console.error(e);
       setError("Failed to fetch news.");
     } finally {
@@ -61,11 +73,7 @@ export const SocialMediaGrid: React.FC = () => {
       {/* Filters on right side */}
       <div className="flex justify-end gap-4 mb-4">
         <select
-          className="border rounded px-3 py-2 
-            bg-white text-gray-900 
-            dark:bg-gray-800 dark:text-gray-100 
-            border-blue-500 dark:border-blue-400
-            focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
+          className="border rounded px-3 py-2 bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100 border-blue-500 dark:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
           value={filters.country}
           onChange={(e) => setFilters({ ...filters, country: e.target.value })}
         >
@@ -75,11 +83,7 @@ export const SocialMediaGrid: React.FC = () => {
           <option value="om">Oman</option>
         </select>
         <select
-          className="border rounded px-3 py-2 
-            bg-white text-gray-900 
-            dark:bg-gray-800 dark:text-gray-100 
-            border-blue-500 dark:border-blue-400
-            focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
+          className="border rounded px-3 py-2 bg-white text-gray-900 dark:bg-gray-800 dark:text-gray-100 border-blue-500 dark:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
           value={filters.language}
           onChange={(e) => setFilters({ ...filters, language: e.target.value })}
         >
@@ -112,11 +116,7 @@ export const SocialMediaGrid: React.FC = () => {
 
       <div className="flex justify-center mt-6 gap-2 flex-wrap items-center">
         <button
-          className="px-4 py-2 border rounded disabled:opacity-50
-            bg-white text-blue-600 border-blue-500
-            dark:bg-gray-800 dark:text-blue-400 dark:border-blue-400
-            hover:bg-blue-100 dark:hover:bg-blue-900
-            transition"
+          className="px-4 py-2 border rounded disabled:opacity-50 bg-white text-blue-600 border-blue-500 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900 transition"
           disabled={prevTokens.length === 0}
           onClick={() => {
             const prevToken = prevTokens.slice(-2, -1)[0];
@@ -130,23 +130,18 @@ export const SocialMediaGrid: React.FC = () => {
         {[...Array(5)].map((_, i) => (
           <span
             key={i}
-            className={`px-3 py-1 border rounded cursor-default
-              ${i + 1 === currentPage 
+            className={`px-3 py-1 border rounded cursor-default ${
+              i + 1 === currentPage
                 ? "bg-blue-500 text-white border-blue-600 dark:bg-blue-600 dark:border-blue-700"
                 : "bg-white text-blue-600 border-blue-500 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-400"
-              }
-              transition`}
+            } transition`}
           >
             {i + 1}
           </span>
         ))}
 
         <button
-          className="px-4 py-2 border rounded disabled:opacity-50
-            bg-white text-blue-600 border-blue-500
-            dark:bg-gray-800 dark:text-blue-400 dark:border-blue-400
-            hover:bg-blue-100 dark:hover:bg-blue-900
-            transition"
+          className="px-4 py-2 border rounded disabled:opacity-50 bg-white text-blue-600 border-blue-500 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900 transition"
           disabled={!nextPage}
           onClick={() => nextPage && fetchPage(nextPage)}
         >
