@@ -14,6 +14,7 @@ import BackgroundAnimation from "./components/BackgroundAnimation";
 import GradientTitle from "./components/GradientTitle";
 import ResumePage from "./components/ResumePage";
 import ChatWidget from "./components/ChatWidget";
+import { NextSeo } from "next-seo";
 
 export default function Home() {
   const [isDarkMode, setIsDarkMode] = useState(true);
@@ -47,6 +48,13 @@ export default function Home() {
 
     return () => clearInterval(interval);
   }, []);
+
+  // SEO Tag
+  <NextSeo
+    title="Minhaj Pro | Freelancer, Full Stack Developer, AI Agent Developer, Next.js Expert"
+    description="Hire Muhammed Minhaj Mahroof – expert Freelancer, Full Stack Developer, and AI Agent Developer. Specialized in Next.js, React, Node.js, and custom web app development. Boost your business with SEO-optimized, high-performance solutions. Available for freelance projects, remote work, and AI integrations."
+    canonical="https://minhaj.pro"
+  />
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");

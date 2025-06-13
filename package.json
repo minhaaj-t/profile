@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postbuild": "node scripts/generate-sitemap.js"
   },
   "dependencies": {
     "aos": "^2.3.4",
@@ -15,10 +16,12 @@
     "fireworks-js": "^2.10.8",
     "lucide-react": "^0.469.0",
     "next": "^15.3.3",
+    "next-seo": "^6.8.0",
     "react": "^18",
     "react-dom": "^18",
     "react-fontawesome": "^1.7.1",
     "react-lottie-player": "^2.1.0",
+    "sitemap": "^8.0.0",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7"
   },
