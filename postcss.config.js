@@ -1,8 +1,8 @@
-const config = {
+module.exports = {
   plugins: {
     tailwindcss: {},
     autoprefixer: {},
   },
 };
-
-export default config; // ❌ This is ESM, which breaks on Netlify
+// This configuration file sets up PostCSS to use Tailwind CSS and Autoprefixer.
+// Tailwind CSS is a utility-first CSS framework that allows for rapid UI development.
